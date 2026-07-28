@@ -12,6 +12,14 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000).
 
+### Variables de entorno
+
+Copia `.env.example` a `.env.local` y completa `NEXT_PUBLIC_FORM_ENDPOINT`
+con tu propio endpoint de [Formspree](https://formspree.io) (u otro
+servicio de formularios sin backend) si quieres probar el envío real del
+formulario de contacto. Sin esta variable, el formulario sigue validando
+pero muestra un error al enviar.
+
 ## Flujo de ramas
 
 - `main`: solo releases estables, taggeados (`vX.Y.Z`).

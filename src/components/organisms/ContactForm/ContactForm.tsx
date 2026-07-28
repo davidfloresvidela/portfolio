@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { CheckCircle2, Download, Mail } from "lucide-react";
+import { AlertCircle, CheckCircle2, Download, Mail } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
@@ -9,40 +8,11 @@ import { Text } from "@/components/atoms/Text";
 import { FormField } from "@/components/molecules/FormField";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { SocialLink } from "@/components/molecules/SocialLink";
+import { useContactForm } from "@/hooks/useContactForm";
 import { contact } from "@/data/contact";
 
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
-}
-
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export function ContactForm() {
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
-
-    const nextErrors: FormErrors = {};
-    if (!name) nextErrors.name = "Escribe tu nombre.";
-    if (!EMAIL_PATTERN.test(email))
-      nextErrors.email = "Introduce un correo válido.";
-    if (message.length < 10)
-      nextErrors.message = "El mensaje debe tener al menos 10 caracteres.";
-
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) {
-      setSubmitted(true);
-      event.currentTarget.reset();
-    }
-  };
+  const { errors, status, handleSubmit } = useContactForm();
 
   return (
     <section
@@ -59,7 +29,7 @@ export function ContactForm() {
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1fr]">
         <Reveal>
-          {submitted ? (
+          {status === "success" ? (
             <div
               role="status"
               className="border-accent/30 bg-accent/5 flex h-full flex-col items-start justify-center gap-3 rounded-2xl border p-8"
@@ -100,9 +70,25 @@ export function ContactForm() {
                 error={errors.message}
               />
 
-              <Button type="submit" size="lg" className="w-full sm:w-auto">
+              {status === "error" && (
+                <p
+                  role="alert"
+                  className="text-danger flex items-center gap-2 font-mono text-sm"
+                >
+                  <Icon icon={AlertCircle} size={16} />
+                  No se pudo enviar. Intenta de nuevo o escríbeme directo a mi
+                  correo.
+                </p>
+              )}
+
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full sm:w-auto"
+                disabled={status === "submitting"}
+              >
                 <Icon icon={Mail} size={18} />
-                Enviar mensaje
+                {status === "submitting" ? "Enviando…" : "Enviar mensaje"}
               </Button>
             </form>
           )}
