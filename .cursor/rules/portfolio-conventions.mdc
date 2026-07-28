@@ -56,6 +56,23 @@ Glows: `var(--glow)` / `var(--glow-2)`. Soporta tema claro/oscuro vía clase en 
 - HTML semántico, un solo `h1`, `:focus-visible` claro, `label` en formularios.
 - Animaciones con `transform`/`opacity`; respetar `prefers-reduced-motion`. Nada bloquea el primer render.
 
+## Convenciones SEO
+
+- `SITE_URL` vive en `src/lib/site.ts` — nunca hardcodear el dominio en otro
+  archivo (`layout.tsx`, `sitemap.ts`, `robots.ts` importan de ahí).
+- Toda ruta nueva bajo `src/app/` que sea una página real (no un componente
+  interno) debe exportar su propio `metadata` (o `generateMetadata`) — título
+  y descripción específicos, no heredar el genérico de la raíz en silencio.
+- Un solo `<h1>` por página. `SectionHeading` y similares usan `as="h2"` (o
+  inferior) aunque el estilo visual imite un `h1`.
+- Toda imagen de contenido (no decorativa) lleva `alt` descriptivo; las
+  decorativas (`Icon`, `BrandIcon` sin `label`) van con `aria-hidden`, que ya
+  es el default de esos átomos si no se pasa `label`.
+- `metadata.alternates.canonical` apunta a `SITE_URL` en la home; si se
+  agregan rutas nuevas, cada una define su propio canonical.
+- JSON-LD (`Person` en el layout) se valida contra el schema real de
+  schema.org — no agregar campos inventados.
+
 ## Flujo de ramas y commits
 
 - `main`: solo releases estables, taggeados (`vX.Y.Z`). Nunca recibe una
