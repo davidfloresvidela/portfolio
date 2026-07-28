@@ -2,10 +2,10 @@ import type { About } from "@/types";
 
 export const about: About = {
   name: "David Flores",
-  role: "Desarrollador Web Full Stack",
+  role: "Desarrollador Full Stack Senior",
   location: "Antofagasta, Chile",
   tagline: "Construyo interfaces rápidas, accesibles y con carácter.",
-  bio: `Desarrollador full stack con más de 5 años creando productos web. Me especializo en el ecosistema React/Next.js y en construir arquitecturas frontend escalables. Me obsesiona el detalle: el rendimiento, la accesibilidad y esa micro-interacción que hace que una interfaz se sienta bien. Cuando no estoy programando, exploro diseño de producto y contribuyo a proyectos open source.`,
-  yearsOfExperience: 5,
+  bio: `Full Stack Developer con 6 años de experiencia construyendo soluciones web escalables para clientes enterprise. Me especializo en backend C# .NET (Clean Architecture, microservicios) y frontend React + TypeScript, con despliegue en Azure y Docker. He liderado migraciones de sistemas legacy, definido estándares técnicos de equipo y gestionado comunicación directa con clientes en proyectos críticos. Me obsesiona el detalle: el rendimiento, la accesibilidad y esa micro-interacción que hace que una interfaz se sienta bien.`,
+  yearsOfExperience: 6,
   available: true,
 };
