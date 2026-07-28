@@ -4,6 +4,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -24,8 +25,6 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://dflores-portfolio.com";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -44,9 +43,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: about.name }],
   creator: about.name,
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
-    locale: "es_MX",
+    // Content and location are Chilean, not Mexican — was previously
+    // es_MX by mistake.
+    locale: "es_CL",
     url: SITE_URL,
     title: `${about.name} — ${about.role}`,
     description: about.tagline,
