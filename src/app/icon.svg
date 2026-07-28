@@ -1,0 +1,25 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="accent" x1="6" y1="8" x2="27" y2="24" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2EE08A" />
+      <stop offset="1" stop-color="#2DD4BF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="32" height="32" rx="8" fill="#0A0F0C" />
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="#2EE08A" stroke-opacity="0.25" />
+
+  <!-- D -->
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M6 8H12C15.3 8 17 11 17 16C17 21 15.3 24 12 24H6V8ZM9 11V21H11.8C13.5 21 14 18.8 14 16C14 13.2 13.5 11 11.8 11H9Z"
+    fill="url(#accent)"
+  />
+
+  <!-- F -->
+  <path
+    d="M19 8H27V11H22V14.5H26V17.5H22V24H19V8Z"
+    fill="url(#accent)"
+  />
+</svg>
