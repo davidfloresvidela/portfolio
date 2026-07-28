@@ -10,7 +10,7 @@ export const navLinks: NavLink[] = [
 ];
 
 export const stats: Stat[] = [
-  { label: "Años de experiencia", value: "5+" },
-  { label: "Proyectos entregados", value: "30+" },
+  { label: "Años de experiencia", value: "6+" },
+  { label: "Clientes enterprise", value: "Colbún · CMF · CAF" },
   { label: "Stack principal", value: "React / Next.js" },
 ];
