@@ -56,7 +56,16 @@ Glows: `var(--glow)` / `var(--glow-2)`. Soporta tema claro/oscuro vía clase en 
 - HTML semántico, un solo `h1`, `:focus-visible` claro, `label` en formularios.
 - Animaciones con `transform`/`opacity`; respetar `prefers-reduced-motion`. Nada bloquea el primer render.
 
-## Git
+## Flujo de ramas y commits
 
-Conventional Commits (`feat:`, `fix:`, `style:`, `refactor:`, `docs:`, `chore:`).
-Cada commit deja el proyecto compilando.
+- `main`: solo releases estables, taggeados (`vX.Y.Z`). Nunca recibe una
+  rama de feature directamente, solo merges de `dev`.
+- `dev`: rama de integración. Todo nace de `dev` y vuelve a `dev` vía PR.
+- Nombre de rama: `tipo/alcance-en-kebab-case`, con `tipo` en
+  `feature | fix | chore | content | docs | test | perf | refactor`.
+- Conventional Commits (`feat:`, `fix:`, `style:`, `refactor:`, `docs:`,
+  `chore:`, `test:`, `perf:`, `content:`). Se valida con commitlint en el
+  hook `commit-msg` y de nuevo en CI sobre cada PR — no es opcional.
+- Cada commit deja el proyecto compilando. `pre-commit` corre
+  `lint-staged` (ESLint + Prettier) sobre los archivos modificados; CI
+  corre `lint`, `typecheck`, `format:check` y `build` sobre cada PR.
