@@ -1,0 +1,62 @@
+---
+description: Core conventions for the David Flores portfolio (stack, atomic design, design system, quality)
+alwaysApply: true
+---
+
+# Portafolio David Flores — Convenciones
+
+Portafolio personal de un dev full stack. Estética limpia "botanical/tech":
+neutros suaves + acento **verde** (con secundarios teal/lima), con modo
+claro y oscuro. **Contenido en español, código en inglés.**
+
+## Stack
+
+- Next.js (App Router, `src/app/`) · TypeScript `strict` (prohibido `any` sin justificar).
+- Tailwind CSS v4 (tokens en `globals.css`) · Framer Motion · lucide-react · `next/font`.
+- ESLint + Prettier: cero errores y cero warnings antes de cerrar una tarea.
+- No añadir librerías sin valor real claro.
+
+## Arquitectura — Atomic Design
+
+`src/components/{atoms,molecules,organisms,templates}`. Un componente NUNCA
+importa de un nivel superior. Cada componente vive en su carpeta:
+`Name.tsx`, `Name.types.ts` (si aplica), `index.ts` que reexporta.
+
+- **atoms**: sin lógica de negocio, todo por props (`Button`, `Badge`, `Text`, `Icon`).
+- **molecules**: combinan átomos (`SkillCard`, `NavItem`, `ProjectCard`).
+- **organisms**: secciones autónomas (`Header`, `HeroSection`, `ContactForm`).
+- **templates**: layout sin datos. **pages/app**: inyectan datos de `src/data/`.
+
+Datos en `src/data/` (tipados con interfaces de `src/types/`), separados de la UI.
+
+## Código
+
+- Componentes funcionales PascalCase, props tipadas con `interface`/`type` exportado.
+- Imports con alias `@/*` (apunta a `src/`). Prohibido `../../../`.
+- Server Components por defecto; `"use client"` solo con estado/efectos/eventos.
+- Hooks `useX` camelCase · constantes `UPPER_SNAKE_CASE` · datos `camelCase.ts`.
+- Comentarios solo para el *por qué*. Componentes > ~150 líneas → dividir.
+
+## Design system (usar tokens, nunca colores hardcodeados)
+
+Tokens CSS en `src/app/globals.css` (bloques `:root,.dark` y `.light`),
+expuestos como utilidades Tailwind: `bg-base/surface/elevated`,
+`text-primary/secondary/muted`, `text/bg/border-accent` (verde),
+`accent-2` (teal), `accent-3` (lima), `danger`, `on-accent`, `border-subtle`.
+Glows: `var(--glow)` / `var(--glow-2)`. Soporta tema claro/oscuro vía clase en `<html>`.
+
+- El acento es **acento**, no relleno. Glow solo en CTAs/jerarquía alta. Máx 2 acentos por sección.
+- Texto sobre relleno de acento: usar `text-on-accent` (no asumir blanco/negro).
+- Tipografía: `font-display` (Space Grotesk), `font-sans` (Inter), `font-mono` (JetBrains Mono).
+- Espaciado en múltiplos de 4. Contraste AA en ambos temas; texto largo nunca en acento puro.
+
+## Responsive · a11y · animación
+
+- Mobile-first, breakpoints Tailwind. Sin scroll horizontal. Targets táctiles ≥ 44px.
+- HTML semántico, un solo `h1`, `:focus-visible` claro, `label` en formularios.
+- Animaciones con `transform`/`opacity`; respetar `prefers-reduced-motion`. Nada bloquea el primer render.
+
+## Git
+
+Conventional Commits (`feat:`, `fix:`, `style:`, `refactor:`, `docs:`, `chore:`).
+Cada commit deja el proyecto compilando.
