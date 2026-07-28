@@ -1,1 +1,228 @@
 @import "tailwindcss";
+
+/* ============================================================
+   Design tokens — botanical / clean palette
+   Soft neutrals + green accent with teal & lime secondaries.
+   Dark is the default identity; `.light` overrides for light mode.
+   ============================================================ */
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* Backgrounds — deep slate with a hint of green */
+  --bg-base: #0a0f0c;
+  --bg-surface: #111815;
+  --bg-elevated: #1a231e;
+
+  /* Accents */
+  --accent: #2ee08a; /* primary green */
+  --accent-2: #2dd4bf; /* teal */
+  --accent-3: #a3e635; /* lime */
+
+  /* Feedback */
+  --danger: #f87171;
+
+  /* Text */
+  --text-primary: #eef3ef;
+  --text-secondary: #9eada3;
+  --text-muted: #5f6c64;
+
+  /* Foreground over accent-filled surfaces (CTAs) */
+  --on-accent: #07130c;
+
+  /* Borders / glow */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --glow: 0 0 24px rgba(46, 224, 138, 0.35);
+  --glow-2: 0 0 24px rgba(45, 212, 191, 0.3);
+}
+
+.light {
+  color-scheme: light;
+
+  /* Backgrounds — soft cool gray with white cards (from reference palette) */
+  --bg-base: #eceef3;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f4f6f9;
+
+  /* Accents — deepened so they keep punch yet pass AA on light */
+  --accent: #15803d; /* primary green */
+  --accent-2: #0e7d77; /* teal */
+  --accent-3: #4d7c0f; /* lime */
+
+  /* Feedback */
+  --danger: #dc2626;
+
+  /* Text */
+  --text-primary: #1b2230;
+  --text-secondary: #586073;
+  --text-muted: #8b91a0;
+
+  /* Foreground over accent-filled surfaces (CTAs) */
+  --on-accent: #ffffff;
+
+  /* Borders / glow */
+  --border-subtle: rgba(20, 28, 24, 0.1);
+  --glow: 0 0 24px rgba(21, 128, 61, 0.18);
+  --glow-2: 0 0 24px rgba(14, 125, 119, 0.16);
+}
+
+/* ============================================================
+   Tailwind theme bridge — exposes tokens as utilities
+   (e.g. bg-base, text-primary, text-accent, border-subtle)
+   ============================================================ */
+@theme inline {
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-danger: var(--danger);
+
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-on-accent: var(--on-accent);
+
+  --color-subtle: var(--border-subtle);
+
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --animate-gradient: gradient-pan 8s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+* {
+  border-color: var(--border-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ambient backdrop: grid + soft radial accent glows */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+  opacity: 0.35;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      40rem 40rem at 85% -5%,
+      color-mix(in oklab, var(--accent) 16%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      36rem 36rem at -5% 100%,
+      color-mix(in oklab, var(--accent-2) 14%, transparent),
+      transparent 70%
+    );
+}
+
+/* Animated multi-stop gradient text helper */
+.text-gradient {
+  background-image: linear-gradient(
+    110deg,
+    var(--accent),
+    var(--accent-2),
+    var(--accent-3),
+    var(--accent)
+  );
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: var(--animate-gradient);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Smooth the theme switch without animating layout-affecting props */
+body,
+::-webkit-scrollbar-thumb {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
