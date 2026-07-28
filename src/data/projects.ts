@@ -1,8 +1,9 @@
 import type { Project } from "@/types";
 
-// TODO(content/real-data): reemplazar liveUrl/repoUrl por las URLs reales
-// una vez estén publicadas — se dejan marcadas a propósito en vez de usar
-// un dominio de ejemplo silencioso.
+// TODO: reemplazar liveUrl/repoUrl por las URLs reales una vez estén
+// publicadas — se dejan marcadas a propósito en vez de usar un dominio de
+// ejemplo silencioso. Pendiente todavía tras el pase de content/real-data:
+// las URLs reales no estaban disponibles al momento de ese commit.
 export const projects: Project[] = [
   {
     title: "StellarisMind",
