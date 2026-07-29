@@ -1,4 +1,6 @@
+import { Globe } from "lucide-react";
 import { BrandIcon, type Brand } from "@/components/atoms/BrandIcon";
+import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/cn";
 import type { SocialLinkProps } from "./SocialLink.types";
 
@@ -14,7 +16,7 @@ export function SocialLink({
   showLabel = false,
   className,
 }: SocialLinkProps) {
-  const brand = brandByLabel[social.label] ?? "x";
+  const brand = brandByLabel[social.label];
 
   return (
     <a
@@ -27,7 +29,11 @@ export function SocialLink({
         className,
       )}
     >
-      <BrandIcon brand={brand} size={18} />
+      {brand ? (
+        <BrandIcon brand={brand} size={18} />
+      ) : (
+        <Icon icon={Globe} size={18} />
+      )}
       {showLabel && <span className="font-mono text-sm">{social.label}</span>}
     </a>
   );
