@@ -47,7 +47,8 @@
     "description": "A sample of products I've designed and built.",
     "featured": "Featured",
     "viewDemo": "View demo",
-    "viewCode": "Code"
+    "viewCode": "Code",
+    "privateCode": "Private code"
   },
   "contact": {
     "eyebrow": "Contact",
