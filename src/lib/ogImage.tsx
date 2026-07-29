@@ -1,11 +1,14 @@
 import { ImageResponse } from "next/og";
 import { about } from "@/data/about";
+import type { Locale } from "@/i18n/routing";
 
 export const ogImageSize = { width: 1200, height: 630 };
 
 // Shared by opengraph-image.tsx and twitter-image.tsx so both social
 // previews render from the same source instead of duplicating the JSX.
-export function renderOgImage() {
+export function renderOgImage(locale: Locale) {
+  const { role, name, tagline } = about[locale];
+
   return new ImageResponse(
     <div
       style={{
@@ -28,7 +31,7 @@ export function renderOgImage() {
           color: "#2ee08a",
         }}
       >
-        {about.role}
+        {role}
       </div>
       <div
         style={{
@@ -39,7 +42,7 @@ export function renderOgImage() {
           color: "#eef3ef",
         }}
       >
-        {about.name}
+        {name}
       </div>
       <div
         style={{
@@ -50,7 +53,7 @@ export function renderOgImage() {
           color: "#9eada3",
         }}
       >
-        {about.tagline}
+        {tagline}
       </div>
     </div>,
     { ...ogImageSize },
