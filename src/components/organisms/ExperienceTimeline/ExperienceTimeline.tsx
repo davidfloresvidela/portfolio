@@ -1,14 +1,12 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { ExperienceItem } from "@/components/molecules/ExperienceItem";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { experience } from "@/data/experience";
+import type { Locale } from "@/i18n/routing";
 
-export async function ExperienceTimeline() {
-  const [t, locale] = await Promise.all([
-    getTranslations("experience"),
-    getLocale(),
-  ]);
+export async function ExperienceTimeline({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "experience" });
   const items = experience[locale];
 
   return (
