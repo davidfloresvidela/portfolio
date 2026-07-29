@@ -142,7 +142,6 @@ export default async function RootLayout({
     jobTitle: role,
     description: tagline,
     email: contact.email,
-    telephone: contact.phone,
     url: SITE_URL,
     address: {
       "@type": "PostalAddress",

@@ -44,7 +44,6 @@ export interface SocialLink {
 
 export interface Contact {
   email: string;
-  phone: string;
   socials: SocialLink[];
   cvUrl: string;
 }
