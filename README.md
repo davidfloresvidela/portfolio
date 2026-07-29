@@ -83,7 +83,6 @@ marcados explícitamente en el código en vez de dejados como placeholders
 silenciosos:
 
 - Despliegue en producción y captura de screenshots reales.
-- URL de "Carrera de Tortugas" (`liveUrl`/`repoUrl` en `src/data/projects.ts`) — sin desplegar todavía.
 - Endpoint real de Formspree (`NEXT_PUBLIC_FORM_ENDPOINT`).
 
 ## Contribuir
