@@ -25,7 +25,7 @@
   /* Text */
   --text-primary: #eef3ef;
   --text-secondary: #9eada3;
-  --text-muted: #5f6c64;
+  --text-muted: #7e8b83;
 
   /* Foreground over accent-filled surfaces (CTAs) */
   --on-accent: #07130c;
@@ -45,17 +45,17 @@
   --bg-elevated: #f4f6f9;
 
   /* Accents — deepened so they keep punch yet pass AA on light */
-  --accent: #15803d; /* primary green */
+  --accent: #117c39; /* primary green */
   --accent-2: #0e7d77; /* teal */
   --accent-3: #4d7c0f; /* lime */
 
   /* Feedback */
-  --danger: #dc2626;
+  --danger: #d41e1e;
 
   /* Text */
   --text-primary: #1b2230;
   --text-secondary: #586073;
-  --text-muted: #8b91a0;
+  --text-muted: #666c76;
 
   /* Foreground over accent-filled surfaces (CTAs) */
   --on-accent: #ffffff;
