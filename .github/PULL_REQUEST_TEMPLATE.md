@@ -10,6 +10,7 @@
 
 - [ ] `npm run lint` pasa sin errores ni warnings
 - [ ] `npm run typecheck` pasa
+- [ ] `npm run test` pasa
 - [ ] `npm run build` pasa
 - [ ] Sigue las convenciones de `.cursor/rules/portfolio-conventions.mdc`
 - [ ] Probado en mobile y desktop (si aplica a UI)
