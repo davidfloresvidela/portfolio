@@ -7,11 +7,12 @@ import { Text } from "@/components/atoms/Text";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { SocialLink } from "@/components/molecules/SocialLink";
 import { contact } from "@/data/contact";
+import type { Locale } from "@/i18n/routing";
 
 // The contact form is temporarily hidden — see useContactForm.ts, which
 // still has it fully implemented and tested for when it comes back.
-export async function ContactForm() {
-  const t = await getTranslations("contact");
+export async function ContactForm({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "contact" });
 
   return (
     <section

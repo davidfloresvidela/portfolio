@@ -13,10 +13,12 @@ Código abierto a propósito: además de ser mi portafolio, es una muestra de
 cómo estructuro un proyecto de principio a fin — arquitectura, convenciones,
 CI/CD y un historial de git organizado por feature.
 
+🔗 **[davidfloresvidela.github.io/portfolio](https://davidfloresvidela.github.io/portfolio)**
+
 ## Screenshots
 
-_Pendiente: se agregan capturas reales (modo claro y oscuro) una vez el
-sitio esté desplegado — ver [Estado del proyecto](#estado-del-proyecto)._
+_Pendiente: se agregan capturas reales (modo claro y oscuro) — ver
+[Estado del proyecto](#estado-del-proyecto)._
 
 ## Stack
 
@@ -69,6 +71,7 @@ formulario de contacto — ver [CONTRIBUTING.md](CONTRIBUTING.md#variables-de-en
 | `npm run test:watch`    | Tests en modo watch                        |
 | `npm run format`        | Prettier (escribe)                         |
 | `npm run format:check`  | Prettier (solo verifica)                   |
+| `npm run build:pages`   | Build de exportación estática para GitHub Pages |
 
 ## Calidad y CI/CD
 
@@ -76,14 +79,24 @@ Cada PR corre en GitHub Actions: lint, typecheck, tests, formato, build, y
 validación de mensajes de commit (Conventional Commits, enforced también
 localmente vía Husky). Ver [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
+Cada push a `main` (es decir, cada release) despliega automáticamente a
+GitHub Pages vía [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
+El sitio es 100% estático (`output: "export"`) — sin servidor, sin
+middleware — así que el idioma por defecto (español) se sirve directamente
+en `/`, y `/en` es la versión en inglés. Detalle de las decisiones de
+arquitectura (basePath, ausencia de middleware, resolución de idioma sin
+`headers()`) documentado en los comentarios de `next.config.ts`,
+`src/i18n/request.ts` y `src/app/layout.tsx`.
+
 ## Estado del proyecto
 
-El sitio está funcionalmente completo (`v1.0.0`). Pendientes conocidos,
-marcados explícitamente en el código en vez de dejados como placeholders
-silenciosos:
+El sitio está funcionalmente completo (`v1.0.0`) y desplegado en GitHub
+Pages. Pendientes conocidos, marcados explícitamente en el código en vez
+de dejados como placeholders silenciosos:
 
-- Despliegue en producción y captura de screenshots reales.
-- Endpoint real de Formspree (`NEXT_PUBLIC_FORM_ENDPOINT`).
+- Captura de screenshots reales (modo claro y oscuro).
+- Endpoint real de Formspree (`NEXT_PUBLIC_FORM_ENDPOINT`) — el formulario
+  de contacto está oculto por ahora (ver `ContactForm.tsx`).
 
 ## Contribuir
 
