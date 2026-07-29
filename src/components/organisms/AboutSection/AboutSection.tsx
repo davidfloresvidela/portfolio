@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
 import { Text } from "@/components/atoms/Text";
@@ -9,7 +9,11 @@ import { about } from "@/data/about";
 import { stats } from "@/data/navigation";
 
 export async function AboutSection() {
-  const t = await getTranslations("about");
+  const [t, locale] = await Promise.all([
+    getTranslations("about"),
+    getLocale(),
+  ]);
+  const { bio, location } = about[locale];
 
   return (
     <section
@@ -23,12 +27,12 @@ export async function AboutSection() {
       <div className="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="space-y-5">
           <Text as="p" variant="body" tone="secondary" className="text-lg">
-            {about.bio}
+            {bio}
           </Text>
           <p className="text-secondary flex items-center gap-2">
             <Icon icon={MapPin} size={18} className="text-accent" />
             <Text as="span" variant="body">
-              {about.location}
+              {location}
             </Text>
           </p>
         </Reveal>
@@ -37,7 +41,7 @@ export async function AboutSection() {
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1"
           delay={0.1}
         >
-          {stats.map((stat) => (
+          {stats[locale].map((stat) => (
             <StatCard key={stat.label} stat={stat} />
           ))}
         </Reveal>

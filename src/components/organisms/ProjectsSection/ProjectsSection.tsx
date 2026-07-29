@@ -1,11 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { projects } from "@/data/projects";
 
 export async function ProjectsSection() {
-  const t = await getTranslations("projects");
+  const [t, locale] = await Promise.all([
+    getTranslations("projects"),
+    getLocale(),
+  ]);
 
   return (
     <section
@@ -21,7 +24,7 @@ export async function ProjectsSection() {
       </Reveal>
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {projects.map((project, index) => (
+        {projects[locale].map((project, index) => (
           <Reveal as="div" key={project.title} delay={index * 0.06}>
             <ProjectCard project={project} />
           </Reveal>
