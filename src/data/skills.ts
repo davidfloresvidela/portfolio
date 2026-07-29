@@ -6,9 +6,20 @@ export const skills: Record<Locale, SkillGroup[]> = {
     {
       id: "frontend",
       category: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "JavaScript"],
+      items: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "React Native",
+        "Expo",
+      ],
     },
-    { id: "backend", category: "Backend", items: ["C#", ".NET", "PHP"] },
+    {
+      id: "backend",
+      category: "Backend",
+      items: ["C#", ".NET", "PHP", "Entity Framework"],
+    },
     {
       id: "database",
       category: "Bases de datos",
@@ -26,6 +37,8 @@ export const skills: Record<Locale, SkillGroup[]> = {
         "Azure OpenAI",
         "AWS S3",
         "Power Platform",
+        "Clerk",
+        "Supabase",
       ],
     },
   ],
@@ -33,9 +46,20 @@ export const skills: Record<Locale, SkillGroup[]> = {
     {
       id: "frontend",
       category: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "JavaScript"],
+      items: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "React Native",
+        "Expo",
+      ],
     },
-    { id: "backend", category: "Backend", items: ["C#", ".NET", "PHP"] },
+    {
+      id: "backend",
+      category: "Backend",
+      items: ["C#", ".NET", "PHP", "Entity Framework"],
+    },
     {
       id: "database",
       category: "Databases",
@@ -53,6 +77,8 @@ export const skills: Record<Locale, SkillGroup[]> = {
         "Azure OpenAI",
         "AWS S3",
         "Power Platform",
+        "Clerk",
+        "Supabase",
       ],
     },
   ],
