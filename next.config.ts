@@ -21,20 +21,36 @@ const securityHeaders = [
   },
 ];
 
+// GitHub Pages only serves static files — no Node server, so no middleware
+// (src/proxy.ts becomes a no-op there) and no custom response headers.
+// `output: "export"` and `basePath` are only turned on for that build (see
+// the "build:pages" script), so `next dev`/`next build`/CI stay exactly as
+// they were for everyone else.
+const isStaticExport = process.env.STATIC_EXPORT === "true";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const nextConfig: NextConfig = {
   // Pins the workspace root so Turbopack doesn't get confused by unrelated
   // lockfiles elsewhere on disk (e.g. a stray one in the user's home dir).
   turbopack: {
     root: path.resolve(__dirname),
   },
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  ...(isStaticExport
+    ? {
+        output: "export",
+        basePath,
+        images: { unoptimized: true },
+      }
+    : {
+        async headers() {
+          return [
+            {
+              source: "/:path*",
+              headers: securityHeaders,
+            },
+          ];
+        },
+      }),
 };
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");

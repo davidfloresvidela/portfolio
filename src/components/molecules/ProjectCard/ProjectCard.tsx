@@ -6,8 +6,8 @@ import { Icon } from "@/components/atoms/Icon";
 import { Text } from "@/components/atoms/Text";
 import type { ProjectCardProps } from "./ProjectCard.types";
 
-export async function ProjectCard({ project }: ProjectCardProps) {
-  const t = await getTranslations("projects");
+export async function ProjectCard({ project, locale }: ProjectCardProps) {
+  const t = await getTranslations({ locale, namespace: "projects" });
 
   return (
     <article className="group border-subtle bg-surface hover:border-accent/40 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--glow)]">

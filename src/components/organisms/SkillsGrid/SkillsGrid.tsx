@@ -6,12 +6,13 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { SkillCard } from "@/components/molecules/SkillCard";
 import { staggerContainer } from "@/lib/motion";
 import { skills } from "@/data/skills";
+import type { Locale } from "@/i18n/routing";
 import type { SkillGroupId } from "@/types";
 
 // Keyed by the stable `id`, not the translated `category` label — the
@@ -23,11 +24,8 @@ const iconByGroupId: Record<SkillGroupId, LucideIcon> = {
   cloud: Cloud,
 };
 
-export async function SkillsGrid() {
-  const [t, locale] = await Promise.all([
-    getTranslations("skills"),
-    getLocale(),
-  ]);
+export async function SkillsGrid({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "skills" });
 
   return (
     <section

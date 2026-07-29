@@ -2,6 +2,10 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 
+// Required for `output: "export"` — nothing here reads request data, so
+// this is also just a more explicit way to say what was already true.
+export const dynamic = "force-static";
+
 // The home page exists once per locale ("/" for the default locale, "/en"
 // for the rest) — this lists every localized URL and points each one at
 // the others via `alternates.languages`, so Google understands they're
