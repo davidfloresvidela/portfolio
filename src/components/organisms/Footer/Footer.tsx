@@ -1,9 +1,11 @@
+import { getTranslations } from "next-intl/server";
 import { Text } from "@/components/atoms/Text";
 import { SocialLink } from "@/components/molecules/SocialLink";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations("footer");
   const year = new Date().getFullYear();
 
   return (
@@ -14,7 +16,7 @@ export function Footer() {
             <span className="text-accent">{about.name}</span>
           </Text>
           <Text as="p" variant="small" tone="muted" className="mt-1">
-            © {year} · Diseñado y desarrollado con Next.js
+            © {year} · {t("tagline")}
           </Text>
         </div>
 

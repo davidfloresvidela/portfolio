@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
+import { routing } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -25,47 +28,66 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${about.name} — ${about.role}`,
-    template: `%s | ${about.name}`,
-  },
-  description: about.tagline,
-  keywords: [
-    "David Flores",
-    "Desarrollador Web",
-    "Full Stack",
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Portafolio",
-  ],
-  authors: [{ name: about.name }],
-  creator: about.name,
-  alternates: {
-    canonical: SITE_URL,
-  },
-  openGraph: {
-    type: "website",
-    // Content and location are Chilean, not Mexican — was previously
-    // es_MX by mistake.
-    locale: "es_CL",
-    url: SITE_URL,
-    title: `${about.name} — ${about.role}`,
+function localeUrl(locale: string): string {
+  return locale === routing.defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
+}
+
+// The canonical/hreflang URLs are correct per-locale from day one (that's
+// routing, not content). The title/description text itself is not — see
+// the TODO below.
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const url = localeUrl(locale);
+  const languages = Object.fromEntries(
+    routing.locales.map((loc) => [loc, localeUrl(loc)]),
+  );
+
+  // TODO(i18n content): about/contact are still Spanish-only data (see
+  // feature/i18n-infrastructure PR), so title/description don't vary by
+  // locale yet — translating src/data/* is the next branch's job.
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: `${about.name} — ${about.role}`,
+      template: `%s | ${about.name}`,
+    },
     description: about.tagline,
-    siteName: `${about.name} · Portafolio`,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${about.name} — ${about.role}`,
-    description: about.tagline,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+    keywords: [
+      "David Flores",
+      "Desarrollador Web",
+      "Full Stack",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Portafolio",
+    ],
+    authors: [{ name: about.name }],
+    creator: about.name,
+    alternates: {
+      canonical: url,
+      languages,
+    },
+    openGraph: {
+      type: "website",
+      // Content and location are Chilean, not Mexican — was previously
+      // es_MX by mistake. Only the routing locale actually varies for now.
+      locale: locale === "en" ? "en_US" : "es_CL",
+      url,
+      title: `${about.name} — ${about.role}`,
+      description: about.tagline,
+      siteName: `${about.name} · Portafolio`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${about.name} — ${about.role}`,
+      description: about.tagline,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: [
@@ -90,7 +112,18 @@ const themeScript = `
 })();
 `;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+// Only the true root layout may render <html>/<body> — [locale]/layout.tsx
+// underneath just validates the locale param and enables static rendering.
+// The locale itself comes from getLocale(), populated by the middleware
+// for every request regardless of how deep this layout sits.
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -109,13 +142,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html
-      lang="es"
+      lang={locale}
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <ThemeProvider>{children}</ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </NextIntlClientProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

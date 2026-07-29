@@ -1,5 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { renderWithIntl } from "@/test/renderWithIntl";
 import { useContactForm } from "./useContactForm";
 
 function TestForm() {
@@ -42,7 +43,7 @@ function fillAndSubmit(
 
 describe("useContactForm", () => {
   it("shows validation errors and stays idle when the form is empty", () => {
-    const { container } = render(<TestForm />);
+    const { container } = renderWithIntl(<TestForm />);
     fillAndSubmit(container, {});
 
     expect(screen.getByText("Escribe tu nombre.")).toBeInTheDocument();
@@ -54,7 +55,7 @@ describe("useContactForm", () => {
   });
 
   it("rejects a message that's too short even if name/email are valid", () => {
-    const { container } = render(<TestForm />);
+    const { container } = renderWithIntl(<TestForm />);
     fillAndSubmit(container, {
       name: "Ada Lovelace",
       email: "ada@example.com",
@@ -71,7 +72,7 @@ describe("useContactForm", () => {
   });
 
   it("moves to the error status when the form is valid but no endpoint is configured", () => {
-    const { container } = render(<TestForm />);
+    const { container } = renderWithIntl(<TestForm />);
     fillAndSubmit(container, {
       name: "Ada Lovelace",
       email: "ada@example.com",

@@ -1,6 +1,7 @@
 "use client";
 
 import { AlertCircle, CheckCircle2, Download, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
@@ -12,6 +13,7 @@ import { useContactForm } from "@/hooks/useContactForm";
 import { contact } from "@/data/contact";
 
 export function ContactForm() {
+  const t = useTranslations("contact");
   const { errors, status, handleSubmit } = useContactForm();
 
   return (
@@ -21,9 +23,9 @@ export function ContactForm() {
     >
       <Reveal>
         <SectionHeading
-          eyebrow="Contacto"
-          title="Construyamos algo juntos"
-          description="¿Tienes un proyecto en mente? Escríbeme y respondo en menos de 24 horas."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
       </Reveal>
 
@@ -36,10 +38,10 @@ export function ContactForm() {
             >
               <Icon icon={CheckCircle2} size={32} className="text-accent" />
               <Text as="p" variant="h3">
-                ¡Mensaje enviado!
+                {t("form.successTitle")}
               </Text>
               <Text as="p" variant="body" tone="secondary">
-                Gracias por escribir. Te responderé muy pronto.
+                {t("form.successBody")}
               </Text>
             </div>
           ) : (
@@ -47,26 +49,26 @@ export function ContactForm() {
               <FormField
                 id="name"
                 name="name"
-                label="Nombre"
+                label={t("form.nameLabel")}
                 autoComplete="name"
-                placeholder="Tu nombre"
+                placeholder={t("form.namePlaceholder")}
                 error={errors.name}
               />
               <FormField
                 id="email"
                 name="email"
-                label="Correo"
+                label={t("form.emailLabel")}
                 type="email"
                 autoComplete="email"
-                placeholder="tucorreo@email.com"
+                placeholder={t("form.emailPlaceholder")}
                 error={errors.email}
               />
               <FormField
                 id="message"
                 name="message"
-                label="Mensaje"
+                label={t("form.messageLabel")}
                 type="textarea"
-                placeholder="Cuéntame sobre tu proyecto…"
+                placeholder={t("form.messagePlaceholder")}
                 error={errors.message}
               />
 
@@ -76,8 +78,7 @@ export function ContactForm() {
                   className="text-danger flex items-center gap-2 font-mono text-sm"
                 >
                   <Icon icon={AlertCircle} size={16} />
-                  No se pudo enviar. Intenta de nuevo o escríbeme directo a mi
-                  correo.
+                  {t("form.errorBanner")}
                 </p>
               )}
 
@@ -88,7 +89,9 @@ export function ContactForm() {
                 disabled={status === "submitting"}
               >
                 <Icon icon={Mail} size={18} />
-                {status === "submitting" ? "Enviando…" : "Enviar mensaje"}
+                {status === "submitting"
+                  ? t("form.submitting")
+                  : t("form.submit")}
               </Button>
             </form>
           )}
@@ -97,7 +100,7 @@ export function ContactForm() {
         <Reveal className="flex flex-col gap-8" delay={0.1}>
           <div className="border-subtle bg-surface rounded-2xl border p-6">
             <Text variant="eyebrow" tone="secondary">
-              Correo directo
+              {t("directEmail")}
             </Text>
             <a
               href={`mailto:${contact.email}`}
@@ -112,7 +115,7 @@ export function ContactForm() {
 
           <div>
             <Text variant="eyebrow" tone="secondary" className="mb-3 block">
-              Redes
+              {t("socials")}
             </Text>
             <ul className="flex flex-wrap gap-3">
               {contact.socials.map((social) => (
@@ -125,7 +128,7 @@ export function ContactForm() {
 
           <Button href={contact.cvUrl} variant="ghost" download>
             <Icon icon={Download} size={18} />
-            Descargar CV
+            {t("downloadCv")}
           </Button>
         </Reveal>
       </div>
