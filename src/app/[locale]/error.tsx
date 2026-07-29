@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/atoms/Button";
 import { Text } from "@/components/atoms/Text";
 
@@ -11,6 +12,8 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations("error");
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -18,16 +21,16 @@ export default function Error({
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-4 text-center">
       <Text variant="eyebrow" tone="accent">
-        Algo salió mal
+        {t("eyebrow")}
       </Text>
       <Text as="h1" variant="display">
-        Hubo un error inesperado
+        {t("heading")}
       </Text>
       <Text as="p" variant="body" tone="secondary" className="max-w-md">
-        Intenta de nuevo. Si el problema persiste, escríbeme directamente.
+        {t("description")}
       </Text>
       <Button type="button" onClick={reset}>
-        Intentar de nuevo
+        {t("retry")}
       </Button>
     </main>
   );

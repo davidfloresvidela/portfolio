@@ -6,6 +6,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { SkillCard } from "@/components/molecules/SkillCard";
@@ -19,7 +20,9 @@ const iconByCategory: Record<string, LucideIcon> = {
   "Cloud & DevOps": Cloud,
 };
 
-export function SkillsGrid() {
+export async function SkillsGrid() {
+  const t = await getTranslations("skills");
+
   return (
     <section
       id="skills"
@@ -27,9 +30,9 @@ export function SkillsGrid() {
     >
       <Reveal>
         <SectionHeading
-          eyebrow="Habilidades"
-          title="Stack técnico"
-          description="Herramientas y tecnologías con las que construyo productos de principio a fin."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
       </Reveal>
 
