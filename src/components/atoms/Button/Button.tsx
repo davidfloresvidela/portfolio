@@ -18,11 +18,22 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "px-7 py-3.5 text-base",
 };
 
+// Exported so non-<Button> elements that need to look like a button (e.g. a
+// locale-aware next-intl <Link>, which Button itself can't render since it
+// only knows plain <a>/<button>) can reuse the exact same classes instead of
+// duplicating them.
+export function getButtonClasses(
+  variant: ButtonVariant = "primary",
+  size: ButtonSize = "md",
+  className?: string,
+): string {
+  return cn(base, variantClasses[variant], sizeClasses[size], className);
+}
+
 export function Button(props: ButtonProps) {
-  const classes = cn(
-    base,
-    variantClasses[props.variant ?? "primary"],
-    sizeClasses[props.size ?? "md"],
+  const classes = getButtonClasses(
+    props.variant ?? "primary",
+    props.size ?? "md",
     props.className,
   );
 
