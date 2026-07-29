@@ -49,6 +49,7 @@ sobre cada PR.
 ```bash
 npm run lint
 npm run typecheck
+npm run test
 npm run format:check
 npm run build
 ```
