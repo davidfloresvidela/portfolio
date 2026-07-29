@@ -1,10 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 import type { Project } from "@/types";
 
-// TODO: reemplazar liveUrl/repoUrl por las URLs reales una vez estén
-// publicadas — se dejan marcadas a propósito en vez de usar un dominio de
-// ejemplo silencioso. Pendiente todavía tras el pase de content/real-data:
-// las URLs reales no estaban disponibles al momento de ese commit.
 export const projects: Record<Locale, Project[]> = {
   es: [
     {
@@ -21,18 +17,25 @@ export const projects: Record<Locale, Project[]> = {
         "Clerk",
         "EF Core",
       ],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
+      liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
       featured: true,
     },
     {
-      title: "Carrera de Tortugas",
+      title: "OptiAhorro",
       description:
-        "Simulación de carreras por línea de comandos con interfaz gráfica en Tkinter. Configuración dinámica de participantes y sistema de apuestas.",
-      stack: ["Python", "Tkinter"],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
-      featured: false,
+        "Comparador de cuentas remuneradas chilenas: permite comparar tasas de interés, saldos mínimos y condiciones de los principales bancos de Chile sin necesidad de registrarse. Instalable como PWA.",
+      stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "TanStack Query",
+        "Zustand",
+        "Zod",
+        "Tailwind CSS",
+      ],
+      liveUrl: "https://www.optiahorro.cl/",
+      featured: true,
     },
   ],
   en: [
@@ -50,18 +53,25 @@ export const projects: Record<Locale, Project[]> = {
         "Clerk",
         "EF Core",
       ],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
+      liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
       featured: true,
     },
     {
-      title: "Turtle Race",
+      title: "OptiAhorro",
       description:
-        "Command-line race simulation with a Tkinter GUI. Dynamic participant setup and a betting system.",
-      stack: ["Python", "Tkinter"],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
-      featured: false,
+        "Comparison tool for Chilean high-yield savings accounts: lets anyone compare interest rates, minimum balances, and terms across Chile's main banks with no sign-up required. Installable as a PWA.",
+      stack: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase",
+        "TanStack Query",
+        "Zustand",
+        "Zod",
+        "Tailwind CSS",
+      ],
+      liveUrl: "https://www.optiahorro.cl/",
+      featured: true,
     },
   ],
 };

@@ -1,16 +1,16 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { getPathname, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
+import { withBasePath } from "@/lib/site";
 import type { LanguageSwitcherProps } from "./LanguageSwitcher.types";
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const t = useTranslations("language");
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <div
@@ -21,23 +21,37 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         className,
       )}
     >
-      {routing.locales.map((loc) => (
-        <button
-          key={loc}
-          type="button"
-          onClick={() => router.replace(pathname, { locale: loc })}
-          aria-current={locale === loc ? "true" : undefined}
-          aria-label={t(loc)}
-          className={cn(
-            "min-h-8 rounded-md px-2.5 py-1 uppercase transition-colors",
-            locale === loc
-              ? "bg-accent/10 text-accent"
-              : "text-secondary hover:text-primary",
-          )}
-        >
-          {loc}
-        </button>
-      ))}
+      {routing.locales.map((loc) => {
+        const isActive = locale === loc;
+        // getPathname resolves the real target URL respecting
+        // localePrefix: "as-needed" (no "/es" prefix for the default
+        // locale) — a plain <a>, not next-intl's <Link>, because passing
+        // an explicit `locale` to <Link> always forces a prefix (it
+        // rendered "/es" instead of "/", which only worked via an extra
+        // redirect hop). A full navigation here is also more robust than a
+        // client-side transition for a locale switch: no stale client
+        // state to worry about. Unlike <Link>, a plain <a> doesn't get
+        // next.config's basePath applied automatically, so it's added by
+        // hand via withBasePath.
+        const href = withBasePath(getPathname({ href: pathname, locale: loc }));
+
+        return (
+          <a
+            key={loc}
+            href={href}
+            aria-current={isActive ? "true" : undefined}
+            aria-label={t(loc)}
+            className={cn(
+              "min-h-8 rounded-md px-2.5 py-1 uppercase transition-colors",
+              isActive
+                ? "bg-accent/10 text-accent pointer-events-none"
+                : "text-secondary hover:text-primary",
+            )}
+          >
+            {loc}
+          </a>
+        );
+      })}
     </div>
   );
 }

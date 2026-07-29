@@ -31,7 +31,9 @@ export interface Project {
   description: string;
   stack: string[];
   liveUrl: string;
-  repoUrl: string;
+  // Absent when the source is closed — some personal projects use private
+  // repos, so this should never be filled with a fabricated GitHub URL.
+  repoUrl?: string;
   featured: boolean;
 }
 
@@ -42,7 +44,6 @@ export interface SocialLink {
 
 export interface Contact {
   email: string;
-  phone: string;
   socials: SocialLink[];
   cvUrl: string;
 }

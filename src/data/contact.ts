@@ -1,8 +1,13 @@
 import type { Contact } from "@/types";
+import { withBasePath } from "@/lib/site";
 
 export const contact: Contact = {
   email: "david.flores22@inacapmail.cl",
-  phone: "+56 9 6444 5729",
-  socials: [{ label: "GitHub", url: "https://github.com/davidfloresvidela" }],
-  cvUrl: "/cv-david-flores.pdf",
+  socials: [
+    { label: "GitHub", url: "https://github.com/davidfloresvidela" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/dfloresvidela" },
+  ],
+  // Rendered through a plain <a> (see Button), which — unlike next/link —
+  // doesn't get the basePath applied automatically.
+  cvUrl: withBasePath("/cv-david-flores.pdf"),
 };

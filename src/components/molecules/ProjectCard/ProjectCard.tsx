@@ -6,8 +6,8 @@ import { Icon } from "@/components/atoms/Icon";
 import { Text } from "@/components/atoms/Text";
 import type { ProjectCardProps } from "./ProjectCard.types";
 
-export async function ProjectCard({ project }: ProjectCardProps) {
-  const t = await getTranslations("projects");
+export async function ProjectCard({ project, locale }: ProjectCardProps) {
+  const t = await getTranslations({ locale, namespace: "projects" });
 
   return (
     <article className="group border-subtle bg-surface hover:border-accent/40 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--glow)]">
@@ -57,15 +57,22 @@ export async function ProjectCard({ project }: ProjectCardProps) {
             className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           />
         </a>
-        <a
-          href={project.repoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-secondary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
-        >
-          <BrandIcon brand="github" size={16} />
-          {t("viewCode")}
-        </a>
+        {project.repoUrl ? (
+          <a
+            href={project.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
+          >
+            <BrandIcon brand="github" size={16} />
+            {t("viewCode")}
+          </a>
+        ) : (
+          <span className="text-secondary/70 inline-flex min-h-11 items-center gap-1.5 font-mono text-sm">
+            <BrandIcon brand="github" size={16} />
+            {t("privateCode")}
+          </span>
+        )}
       </div>
     </article>
   );
