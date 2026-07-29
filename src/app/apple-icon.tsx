@@ -2,6 +2,9 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
+// Required for `output: "export"` — nothing here reads request data, so
+// this is also just a more explicit way to say what was already true.
+export const dynamic = "force-static";
 
 // Apple applies its own corner mask, so this stays a plain square — same
 // "DF" monogram as icon.svg, generated as a PNG since iOS doesn't accept SVG

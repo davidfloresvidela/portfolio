@@ -22,13 +22,13 @@ export default async function Home({
   setRequestLocale(locale);
 
   return (
-    <MainTemplate header={<Header />} footer={<Footer />}>
+    <MainTemplate header={<Header />} footer={<Footer locale={locale} />}>
       <HeroSection />
-      <AboutSection />
-      <SkillsGrid />
-      <ExperienceTimeline />
-      <ProjectsSection />
-      <ContactForm />
+      <AboutSection locale={locale} />
+      <SkillsGrid locale={locale} />
+      <ExperienceTimeline locale={locale} />
+      <ProjectsSection locale={locale} />
+      <ContactForm locale={locale} />
     </MainTemplate>
   );
 }

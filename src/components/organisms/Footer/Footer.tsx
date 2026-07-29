@@ -1,14 +1,12 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Text } from "@/components/atoms/Text";
 import { SocialLink } from "@/components/molecules/SocialLink";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
+import type { Locale } from "@/i18n/routing";
 
-export async function Footer() {
-  const [t, locale] = await Promise.all([
-    getTranslations("footer"),
-    getLocale(),
-  ]);
+export async function Footer({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "footer" });
   const year = new Date().getFullYear();
 
   return (
