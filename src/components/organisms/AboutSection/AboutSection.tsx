@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
 import { Text } from "@/components/atoms/Text";
@@ -7,12 +7,10 @@ import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { StatCard } from "@/components/molecules/StatCard";
 import { about } from "@/data/about";
 import { stats } from "@/data/navigation";
+import type { Locale } from "@/i18n/routing";
 
-export async function AboutSection() {
-  const [t, locale] = await Promise.all([
-    getTranslations("about"),
-    getLocale(),
-  ]);
+export async function AboutSection({ locale }: { locale: Locale }) {
+  const t = await getTranslations({ locale, namespace: "about" });
   const { bio, location } = about[locale];
 
   return (

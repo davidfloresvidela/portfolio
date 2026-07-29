@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getPathname, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
+import { withBasePath } from "@/lib/site";
 import type { LanguageSwitcherProps } from "./LanguageSwitcher.types";
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
@@ -29,8 +30,10 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
         // rendered "/es" instead of "/", which only worked via an extra
         // redirect hop). A full navigation here is also more robust than a
         // client-side transition for a locale switch: no stale client
-        // state to worry about.
-        const href = getPathname({ href: pathname, locale: loc });
+        // state to worry about. Unlike <Link>, a plain <a> doesn't get
+        // next.config's basePath applied automatically, so it's added by
+        // hand via withBasePath.
+        const href = withBasePath(getPathname({ href: pathname, locale: loc }));
 
         return (
           <a
