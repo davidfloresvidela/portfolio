@@ -47,7 +47,8 @@
     "description": "Una muestra de productos que he diseñado y desarrollado.",
     "featured": "Destacado",
     "viewDemo": "Ver demo",
-    "viewCode": "Código"
+    "viewCode": "Código",
+    "privateCode": "Código privado"
   },
   "contact": {
     "eyebrow": "Contacto",

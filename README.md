@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ee08a.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000.svg)](https://nextjs.org)
 
-Portafolio personal de **David Flores**, Desarrollador Full Stack Senior.
+Portafolio personal de **David Flores**, Desarrollador Full Stack.
 Sitio de una sola página: hero, sobre mí, habilidades, experiencia,
 proyectos y contacto — con modo claro/oscuro completo y una estética
 "botanical/tech" (neutros suaves + acento verde).
@@ -83,8 +83,7 @@ marcados explícitamente en el código en vez de dejados como placeholders
 silenciosos:
 
 - Despliegue en producción y captura de screenshots reales.
-- URLs de proyectos personales (`liveUrl`/`repoUrl` en `src/data/projects.ts`).
-- Redes LinkedIn/X en `src/data/contact.ts`.
+- URL de "Carrera de Tortugas" (`liveUrl`/`repoUrl` en `src/data/projects.ts`) — sin desplegar todavía.
 - Endpoint real de Formspree (`NEXT_PUBLIC_FORM_ENDPOINT`).
 
 ## Contribuir
