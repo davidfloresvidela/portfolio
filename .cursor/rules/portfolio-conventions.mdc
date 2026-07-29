@@ -73,6 +73,27 @@ Glows: `var(--glow)` / `var(--glow-2)`. Soporta tema claro/oscuro vía clase en 
 - JSON-LD (`Person` en el layout) se valida contra el schema real de
   schema.org — no agregar campos inventados.
 
+## Testing
+
+Vitest + Testing Library (`jsdom`), config en `vitest.config.ts` /
+`vitest.setup.ts`. `test.globals` está en `false` a propósito — se importa
+`describe`/`it`/`expect`/`vi` explícitamente en cada archivo, coherente con
+el resto del proyecto (nada implícito). El cleanup entre tests se registra a
+mano en `vitest.setup.ts` (no depende de globals).
+
+Qué se testea por convención:
+
+- Hooks con lógica no trivial (`useScrollSpy`, `usePointerGlow`,
+  `useContactForm`) — vía `renderHook`/`render`, mockeando APIs del
+  navegador que `jsdom` no implementa (`IntersectionObserver`,
+  `matchMedia`) en el propio test, no globalmente.
+- Utilidades puras en `lib/` (`cn`, variants de `motion`).
+- Componentes con estado condicional visible (activo/inactivo, error/éxito,
+  toggle) — no cada átomo/molecule presentacional sin lógica.
+
+`npm run test` corre en CI (`.github/workflows/ci.yml`) — un test que falla
+bloquea el PR, igual que lint/typecheck/build.
+
 ## Flujo de ramas y commits
 
 - `main`: solo releases estables, taggeados (`vX.Y.Z`). Nunca recibe una
