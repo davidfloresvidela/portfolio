@@ -6,9 +6,9 @@ export const skills: Record<Locale, SkillGroup[]> = {
     {
       id: "frontend",
       category: "Frontend",
-      items: ["React", "TypeScript", "JavaScript"],
+      items: ["React", "Next.js", "TypeScript", "JavaScript"],
     },
-    { id: "backend", category: "Backend", items: ["C#", ".NET"] },
+    { id: "backend", category: "Backend", items: ["C#", ".NET", "PHP"] },
     {
       id: "database",
       category: "Bases de datos",
@@ -17,16 +17,25 @@ export const skills: Record<Locale, SkillGroup[]> = {
     {
       id: "cloud",
       category: "Cloud & DevOps",
-      items: ["Azure", "AWS S3", "Docker", "Power Platform"],
+      items: [
+        "Docker",
+        "Azure App Service",
+        "Azure Static Web Apps",
+        "Azure Event Grid",
+        "Azure Key Vault",
+        "Azure OpenAI",
+        "AWS S3",
+        "Power Platform",
+      ],
     },
   ],
   en: [
     {
       id: "frontend",
       category: "Frontend",
-      items: ["React", "TypeScript", "JavaScript"],
+      items: ["React", "Next.js", "TypeScript", "JavaScript"],
     },
-    { id: "backend", category: "Backend", items: ["C#", ".NET"] },
+    { id: "backend", category: "Backend", items: ["C#", ".NET", "PHP"] },
     {
       id: "database",
       category: "Databases",
@@ -35,7 +44,16 @@ export const skills: Record<Locale, SkillGroup[]> = {
     {
       id: "cloud",
       category: "Cloud & DevOps",
-      items: ["Azure", "AWS S3", "Docker", "Power Platform"],
+      items: [
+        "Docker",
+        "Azure App Service",
+        "Azure Static Web Apps",
+        "Azure Event Grid",
+        "Azure Key Vault",
+        "Azure OpenAI",
+        "AWS S3",
+        "Power Platform",
+      ],
     },
   ],
 };
