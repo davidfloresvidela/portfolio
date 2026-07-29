@@ -1,5 +1,6 @@
 import path from "node:path";
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // No Content-Security-Policy here on purpose: the anti-FOUC theme script and
 // the JSON-LD block in layout.tsx are both inline, so a real CSP would need
@@ -36,4 +37,6 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+export default withNextIntl(nextConfig);

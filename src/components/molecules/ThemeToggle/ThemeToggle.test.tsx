@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { renderWithIntl } from "@/test/renderWithIntl";
 import { ThemeToggle } from "./ThemeToggle";
 
 afterEach(() => {
@@ -9,7 +10,7 @@ afterEach(() => {
 
 describe("ThemeToggle", () => {
   it("defaults to dark when no theme class is set on <html>", () => {
-    render(
+    renderWithIntl(
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>,
@@ -20,7 +21,7 @@ describe("ThemeToggle", () => {
   });
 
   it("toggles the <html> class and its own label when clicked", () => {
-    render(
+    renderWithIntl(
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>,

@@ -73,6 +73,40 @@ Glows: `var(--glow)` / `var(--glow-2)`. Soporta tema claro/oscuro vía clase en 
 - JSON-LD (`Person` en el layout) se valida contra el schema real de
   schema.org — no agregar campos inventados.
 
+## Internacionalización (i18n)
+
+`next-intl`, ruteo por URL: `/` = español (`defaultLocale`, sin prefijo),
+`/en` = inglés (`localePrefix: "as-needed"`). Config en `src/i18n/`
+(`routing.ts`, `navigation.ts`, `request.ts`, `messages.d.ts`) y
+`src/proxy.ts` (el archivo se llama `proxy.ts`, no `middleware.ts` — Next 16
+renombró la convención). Mensajes en `messages/{es,en}.json`, misma
+estructura en ambos, tipados vía `messages.d.ts`.
+
+- **UI (chrome)** — nav, botones, labels de formulario, copy de
+  error/loading — vive en `messages/*.json`, nunca hardcodeado en el
+  componente. Server Components usan `getTranslations` (`next-intl/server`,
+  async); Client Components usan `useTranslations` (`next-intl`, síncrono).
+- **Contenido** (`src/data/*`) — cada módulo exporta `Record<Locale, T>`
+  (`about`, `experience`, `projects`, `skills`, `stats`), el consumidor
+  resuelve `data[locale]`. `contact.ts` es la excepción: no tiene texto
+  traducible (email/teléfono/URLs), se queda plano. Los campos que son
+  nombres propios o valores numéricos (`company`, `stack`, `yearsOfExperience`)
+  se repiten idénticos en ambas entradas de locale en vez de intentar
+  deduplicarlos — mantiene el patrón de consumo uniforme (`data[locale].x`
+  siempre funciona) aunque implique redundancia menor.
+- `SkillGroup` tiene un `id` estable (`"frontend" | "backend" | ...`)
+  separado de `category` (el label traducido) — nunca usar `category` como
+  key de lookup (íconos, `key` de lista), porque cambia de texto por idioma.
+- **Navegación interna entre páginas** (no anclas `#section`) usa `Link`/
+  `redirect`/`usePathname`/`useRouter` de `@/i18n/navigation`, nunca
+  `next/link` ni `next/navigation` directo — si no, el link pierde el
+  prefijo de idioma actual.
+- Un Client Component **no puede** importar y renderizar directamente un
+  Server Component que use `getTranslations` (server-only) — pasarlo como
+  prop/children desde un Server Component padre (ver `MainTemplate` +
+  `page.tsx`: `Header`/`Footer` llegan como props, no como imports directos
+  dentro del propio `MainTemplate`).
+
 ## Testing
 
 Vitest + Testing Library (`jsdom`), config en `vitest.config.ts` /

@@ -8,7 +8,12 @@ export interface About {
   available: boolean;
 }
 
+export type SkillGroupId = "frontend" | "backend" | "database" | "cloud";
+
 export interface SkillGroup {
+  // Stable, locale-independent key for things like icon lookup — `category`
+  // is the translated display label and shouldn't be used for matching.
+  id: SkillGroupId;
   category: string;
   items: string[];
 }

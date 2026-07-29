@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown, FolderGit2, Sparkles } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/atoms/Button";
 import { Icon } from "@/components/atoms/Icon";
 import { Text } from "@/components/atoms/Text";
@@ -10,6 +11,9 @@ import { fadeInUp, staggerContainer } from "@/lib/motion";
 import { about } from "@/data/about";
 
 export function HeroSection() {
+  const t = useTranslations("hero");
+  const locale = useLocale();
+  const { role, name, tagline, available } = about[locale];
   const glowRef = usePointerGlow<HTMLDivElement>();
 
   return (
@@ -40,14 +44,14 @@ export function HeroSection() {
           animate="visible"
           className="max-w-3xl"
         >
-          {about.available && (
+          {available && (
             <motion.div variants={fadeInUp} className="mb-6">
               <span className="border-accent/30 bg-accent/5 text-accent inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-xs">
                 <span className="relative flex size-2">
                   <span className="bg-accent absolute inline-flex size-full animate-ping rounded-full opacity-60" />
                   <span className="bg-accent relative inline-flex size-2 rounded-full" />
                 </span>
-                Disponible para proyectos
+                {t("available")}
               </span>
             </motion.div>
           )}
@@ -59,7 +63,7 @@ export function HeroSection() {
               className="flex items-center gap-2"
             >
               <Icon icon={Sparkles} size={14} />
-              {about.role}
+              {role}
             </Text>
           </motion.div>
 
@@ -67,8 +71,8 @@ export function HeroSection() {
             variants={fadeInUp}
             className="font-display mt-4 text-[clamp(2.75rem,9vw,5rem)] leading-[1.02] font-bold tracking-tight"
           >
-            <span className="text-primary">Hola, soy </span>
-            <span className="text-gradient">{about.name}</span>
+            <span className="text-primary">{t("greeting")} </span>
+            <span className="text-gradient">{name}</span>
           </motion.h1>
 
           <motion.div variants={fadeInUp}>
@@ -78,7 +82,7 @@ export function HeroSection() {
               tone="secondary"
               className="mt-6 max-w-xl text-lg"
             >
-              {about.tagline}
+              {tagline}
             </Text>
           </motion.div>
 
@@ -88,10 +92,10 @@ export function HeroSection() {
           >
             <Button href="#projects" size="lg">
               <Icon icon={FolderGit2} size={18} />
-              Ver proyectos
+              {t("viewProjects")}
             </Button>
             <Button href="#contact" variant="secondary" size="lg">
-              Contactar
+              {t("contact")}
             </Button>
           </motion.div>
         </motion.div>
@@ -99,7 +103,7 @@ export function HeroSection() {
 
       <a
         href="#about"
-        aria-label="Desplázate a la sección sobre mí"
+        aria-label={t("scrollDown")}
         className="text-muted hover:text-accent absolute bottom-8 left-1/2 hidden -translate-x-1/2 transition-colors md:block"
       >
         <motion.span

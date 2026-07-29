@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 interface FormErrors {
   name?: string;
@@ -17,6 +18,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FORM_ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
 
 export function useContactForm() {
+  const t = useTranslations("contact.form.errors");
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<ContactFormStatus>("idle");
 
@@ -29,11 +31,9 @@ export function useContactForm() {
     const message = String(data.get("message") ?? "").trim();
 
     const nextErrors: FormErrors = {};
-    if (!name) nextErrors.name = "Escribe tu nombre.";
-    if (!EMAIL_PATTERN.test(email))
-      nextErrors.email = "Introduce un correo válido.";
-    if (message.length < 10)
-      nextErrors.message = "El mensaje debe tener al menos 10 caracteres.";
+    if (!name) nextErrors.name = t("name");
+    if (!EMAIL_PATTERN.test(email)) nextErrors.email = t("email");
+    if (message.length < 10) nextErrors.message = t("message");
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;

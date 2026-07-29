@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
+import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -25,14 +28,12 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${about.name} — ${about.role}`,
-    template: `%s | ${about.name}`,
-  },
-  description: about.tagline,
-  keywords: [
+function localeUrl(locale: string): string {
+  return locale === routing.defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
+}
+
+const keywordsByLocale: Record<Locale, string[]> = {
+  es: [
     "David Flores",
     "Desarrollador Web",
     "Full Stack",
@@ -41,31 +42,62 @@ export const metadata: Metadata = {
     "TypeScript",
     "Portafolio",
   ],
-  authors: [{ name: about.name }],
-  creator: about.name,
-  alternates: {
-    canonical: SITE_URL,
-  },
-  openGraph: {
-    type: "website",
-    // Content and location are Chilean, not Mexican — was previously
-    // es_MX by mistake.
-    locale: "es_CL",
-    url: SITE_URL,
-    title: `${about.name} — ${about.role}`,
-    description: about.tagline,
-    siteName: `${about.name} · Portafolio`,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${about.name} — ${about.role}`,
-    description: about.tagline,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  en: [
+    "David Flores",
+    "Web Developer",
+    "Full Stack",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Portfolio",
+  ],
 };
+
+// The canonical/hreflang URLs and now the title/description text are both
+// correct per-locale — about/contact were translated in feature/i18n-content.
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const url = localeUrl(locale);
+  const languages = Object.fromEntries(
+    routing.locales.map((loc) => [loc, localeUrl(loc)]),
+  );
+  const { name, role, tagline } = about[locale];
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: `${name} — ${role}`,
+      template: `%s | ${name}`,
+    },
+    description: tagline,
+    keywords: keywordsByLocale[locale],
+    authors: [{ name }],
+    creator: name,
+    alternates: {
+      canonical: url,
+      languages,
+    },
+    openGraph: {
+      type: "website",
+      // Content and location are Chilean, not Mexican — was previously
+      // es_MX by mistake.
+      locale: locale === "en" ? "en_US" : "es_CL",
+      url,
+      title: `${name} — ${role}`,
+      description: tagline,
+      siteName: `${name} · Portafolio`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} — ${role}`,
+      description: tagline,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: [
@@ -90,32 +122,46 @@ const themeScript = `
 })();
 `;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+// Only the true root layout may render <html>/<body> — [locale]/layout.tsx
+// underneath just validates the locale param and enables static rendering.
+// The locale itself comes from getLocale(), populated by the middleware
+// for every request regardless of how deep this layout sits.
+export default async function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+  const { name, role, tagline, location } = about[locale];
+
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: about.name,
-    jobTitle: about.role,
-    description: about.tagline,
+    name,
+    jobTitle: role,
+    description: tagline,
     email: contact.email,
     telephone: contact.phone,
     url: SITE_URL,
     address: {
       "@type": "PostalAddress",
-      addressLocality: about.location,
+      addressLocality: location,
     },
     sameAs: contact.socials.map((social) => social.url),
   };
 
   return (
     <html
-      lang="es"
+      lang={locale}
       suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <ThemeProvider>{children}</ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </NextIntlClientProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

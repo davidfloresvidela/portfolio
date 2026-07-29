@@ -1,11 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Badge } from "@/components/atoms/Badge";
 import { BrandIcon } from "@/components/atoms/BrandIcon";
 import { Icon } from "@/components/atoms/Icon";
 import { Text } from "@/components/atoms/Text";
 import type { ProjectCardProps } from "./ProjectCard.types";
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export async function ProjectCard({ project }: ProjectCardProps) {
+  const t = await getTranslations("projects");
+
   return (
     <article className="group border-subtle bg-surface hover:border-accent/40 relative flex h-full flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--glow)]">
       <span
@@ -25,7 +28,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         >
           {project.title}
         </Text>
-        {project.featured && <Badge tone="accent2">Destacado</Badge>}
+        {project.featured && <Badge tone="accent2">{t("featured")}</Badge>}
       </div>
 
       <Text as="p" variant="body" tone="secondary" className="flex-1">
@@ -47,7 +50,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           rel="noopener noreferrer"
           className="text-primary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
         >
-          Ver demo
+          {t("viewDemo")}
           <Icon
             icon={ArrowUpRight}
             size={16}
@@ -61,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           className="text-secondary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
         >
           <BrandIcon brand="github" size={16} />
-          Código
+          {t("viewCode")}
         </a>
       </div>
     </article>

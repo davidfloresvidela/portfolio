@@ -1,0 +1,100 @@
+{
+  "language": {
+    "label": "Idioma",
+    "es": "Español",
+    "en": "English"
+  },
+  "nav": {
+    "hero": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "srLabel": "Navegación principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "theme": {
+    "activateLight": "Activar modo claro",
+    "activateDark": "Activar modo oscuro",
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "available": "Disponible para proyectos",
+    "viewProjects": "Ver proyectos",
+    "contact": "Contactar",
+    "scrollDown": "Desplázate a la sección sobre mí"
+  },
+  "about": {
+    "eyebrow": "Sobre mí",
+    "title": "Detrás del código"
+  },
+  "skills": {
+    "eyebrow": "Habilidades",
+    "title": "Stack técnico",
+    "description": "Herramientas y tecnologías con las que construyo productos de principio a fin."
+  },
+  "experience": {
+    "eyebrow": "Experiencia",
+    "title": "Trayectoria profesional"
+  },
+  "projects": {
+    "eyebrow": "Proyectos",
+    "title": "Trabajo seleccionado",
+    "description": "Una muestra de productos que he diseñado y desarrollado.",
+    "featured": "Destacado",
+    "viewDemo": "Ver demo",
+    "viewCode": "Código"
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Construyamos algo juntos",
+    "description": "¿Tienes un proyecto en mente? Escríbeme y respondo en menos de 24 horas.",
+    "form": {
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "emailLabel": "Correo",
+      "emailPlaceholder": "tucorreo@email.com",
+      "messageLabel": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto…",
+      "submit": "Enviar mensaje",
+      "submitting": "Enviando…",
+      "successTitle": "¡Mensaje enviado!",
+      "successBody": "Gracias por escribir. Te responderé muy pronto.",
+      "errorBanner": "No se pudo enviar. Intenta de nuevo o escríbeme directo a mi correo.",
+      "errors": {
+        "name": "Escribe tu nombre.",
+        "email": "Introduce un correo válido.",
+        "message": "El mensaje debe tener al menos 10 caracteres."
+      }
+    },
+    "directEmail": "Correo directo",
+    "socials": "Redes",
+    "downloadCv": "Descargar CV"
+  },
+  "footer": {
+    "tagline": "Diseñado y desarrollado con Next.js"
+  },
+  "layout": {
+    "skipToContent": "Saltar al contenido"
+  },
+  "notFound": {
+    "metaTitle": "Página no encontrada",
+    "eyebrow": "Error 404",
+    "heading": "Esta página no existe",
+    "description": "El enlace que seguiste puede estar roto, o la página se movió.",
+    "backHome": "Volver al inicio"
+  },
+  "error": {
+    "eyebrow": "Algo salió mal",
+    "heading": "Hubo un error inesperado",
+    "description": "Intenta de nuevo. Si el problema persiste, escríbeme directamente.",
+    "retry": "Intentar de nuevo"
+  },
+  "loading": {
+    "label": "Cargando…"
+  }
+}
