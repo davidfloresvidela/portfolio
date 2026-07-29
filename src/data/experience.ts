@@ -5,7 +5,7 @@ export const experience: Record<Locale, ExperienceItem[]> = {
   es: [
     {
       company: "IMAGEN S.A.",
-      role: "Desarrollador Full Stack Senior",
+      role: "Desarrollador Full Stack",
       period: "nov. 2021 — Actualidad",
       description:
         "Desarrollo full stack de sistemas web enterprise para clientes como Colbún, CMF y CAF, con React + TypeScript y C# .NET. Arquitectura backend con Clean Architecture, microservicios, caching, rate limiting y políticas de reintento (Polly). Lideré la migración de un sistema legacy de permisos de trabajo (SharePoint + WebParts) a una arquitectura moderna con React + Vite, microservicios en .NET 10 LTS y SQL Server normalizado. Referente técnico del equipo: definición de estándares, mentoría y comunicación directa con clientes.",
@@ -48,7 +48,7 @@ export const experience: Record<Locale, ExperienceItem[]> = {
   en: [
     {
       company: "IMAGEN S.A.",
-      role: "Senior Full Stack Developer",
+      role: "Full Stack Developer",
       period: "Nov 2021 — Present",
       description:
         "Full-stack development of enterprise web systems for clients such as Colbún, CMF, and CAF, using React + TypeScript and C# .NET. Backend architecture with Clean Architecture, microservices, caching, rate limiting, and retry policies (Polly). Led the migration of a legacy work-permit system (SharePoint + WebParts) to a modern architecture with React + Vite, microservices on .NET 10 LTS, and a normalized SQL Server database. Technical point of contact for the team: defining standards, mentoring, and direct client communication.",
