@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@/components/atoms/Icon";
 import { LanguageSwitcher } from "@/components/molecules/LanguageSwitcher";
 import { NavItem } from "@/components/molecules/NavItem";
@@ -24,6 +24,7 @@ const NAV_IDS = [
 
 export function Header() {
   const t = useTranslations("nav");
+  const locale = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const activeId = useScrollSpy([...NAV_IDS]);
   const { scrollYProgress } = useScroll();
@@ -38,7 +39,7 @@ export function Header() {
     label: t(id),
   }));
 
-  const initials = about.name
+  const initials = about[locale].name
     .split(" ")
     .map((part) => part[0])
     .join("");

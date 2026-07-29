@@ -1,11 +1,15 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { ExperienceItem } from "@/components/molecules/ExperienceItem";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { experience } from "@/data/experience";
 
 export async function ExperienceTimeline() {
-  const t = await getTranslations("experience");
+  const [t, locale] = await Promise.all([
+    getTranslations("experience"),
+    getLocale(),
+  ]);
+  const items = experience[locale];
 
   return (
     <section
@@ -17,16 +21,13 @@ export async function ExperienceTimeline() {
       </Reveal>
 
       <ol className="mt-12 space-y-8">
-        {experience.map((item, index) => (
+        {items.map((item, index) => (
           <Reveal
             as="li"
             key={`${item.company}-${item.period}`}
             delay={index * 0.05}
           >
-            <ExperienceItem
-              item={item}
-              isLast={index === experience.length - 1}
-            />
+            <ExperienceItem item={item} isLast={index === items.length - 1} />
           </Reveal>
         ))}
       </ol>

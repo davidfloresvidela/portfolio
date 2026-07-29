@@ -1,11 +1,14 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Text } from "@/components/atoms/Text";
 import { SocialLink } from "@/components/molecules/SocialLink";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
 
 export async function Footer() {
-  const t = await getTranslations("footer");
+  const [t, locale] = await Promise.all([
+    getTranslations("footer"),
+    getLocale(),
+  ]);
   const year = new Date().getFullYear();
 
   return (
@@ -13,7 +16,7 @@ export async function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-4 py-10 sm:px-6 md:flex-row lg:px-8">
         <div className="text-center md:text-left">
           <Text as="p" variant="h3" className="font-display">
-            <span className="text-accent">{about.name}</span>
+            <span className="text-accent">{about[locale].name}</span>
           </Text>
           <Text as="p" variant="small" tone="muted" className="mt-1">
             © {year} · {t("tagline")}
