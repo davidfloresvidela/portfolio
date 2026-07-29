@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality:
-    name: Lint, typecheck and build
+    name: Lint, typecheck, test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +25,8 @@ jobs:
       - run: npm run typecheck
 
       - run: npm run format:check
+
+      - run: npm run test
 
       - run: npm run build
 
