@@ -1,9 +1,6 @@
 import type { Locale } from "@/i18n/routing";
 import type { Project } from "@/types";
 
-// Turtle Race's liveUrl/repoUrl are still placeholders — it was never
-// deployed or open-sourced, so this stays marked instead of using a silent
-// example domain until (if ever) that changes.
 export const projects: Record<Locale, Project[]> = {
   es: [
     {
@@ -40,15 +37,6 @@ export const projects: Record<Locale, Project[]> = {
       liveUrl: "https://www.optiahorro.cl/",
       featured: true,
     },
-    {
-      title: "Carrera de Tortugas",
-      description:
-        "Simulación de carreras por línea de comandos con interfaz gráfica en Tkinter. Configuración dinámica de participantes y sistema de apuestas.",
-      stack: ["Python", "Tkinter"],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
-      featured: false,
-    },
   ],
   en: [
     {
@@ -84,15 +72,6 @@ export const projects: Record<Locale, Project[]> = {
       ],
       liveUrl: "https://www.optiahorro.cl/",
       featured: true,
-    },
-    {
-      title: "Turtle Race",
-      description:
-        "Command-line race simulation with a Tkinter GUI. Dynamic participant setup and a betting system.",
-      stack: ["Python", "Tkinter"],
-      liveUrl: "https://TODO-set-live-url.example",
-      repoUrl: "https://github.com/davidfloresvidela/TODO-set-repo",
-      featured: false,
     },
   ],
 };
