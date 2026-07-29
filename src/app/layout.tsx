@@ -6,7 +6,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { about } from "@/data/about";
 import { contact } from "@/data/contact";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -32,37 +32,47 @@ function localeUrl(locale: string): string {
   return locale === routing.defaultLocale ? SITE_URL : `${SITE_URL}/${locale}`;
 }
 
-// The canonical/hreflang URLs are correct per-locale from day one (that's
-// routing, not content). The title/description text itself is not — see
-// the TODO below.
+const keywordsByLocale: Record<Locale, string[]> = {
+  es: [
+    "David Flores",
+    "Desarrollador Web",
+    "Full Stack",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Portafolio",
+  ],
+  en: [
+    "David Flores",
+    "Web Developer",
+    "Full Stack",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Portfolio",
+  ],
+};
+
+// The canonical/hreflang URLs and now the title/description text are both
+// correct per-locale — about/contact were translated in feature/i18n-content.
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   const url = localeUrl(locale);
   const languages = Object.fromEntries(
     routing.locales.map((loc) => [loc, localeUrl(loc)]),
   );
+  const { name, role, tagline } = about[locale];
 
-  // TODO(i18n content): about/contact are still Spanish-only data (see
-  // feature/i18n-infrastructure PR), so title/description don't vary by
-  // locale yet — translating src/data/* is the next branch's job.
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${about.name} — ${about.role}`,
-      template: `%s | ${about.name}`,
+      default: `${name} — ${role}`,
+      template: `%s | ${name}`,
     },
-    description: about.tagline,
-    keywords: [
-      "David Flores",
-      "Desarrollador Web",
-      "Full Stack",
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Portafolio",
-    ],
-    authors: [{ name: about.name }],
-    creator: about.name,
+    description: tagline,
+    keywords: keywordsByLocale[locale],
+    authors: [{ name }],
+    creator: name,
     alternates: {
       canonical: url,
       languages,
@@ -70,17 +80,17 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       // Content and location are Chilean, not Mexican — was previously
-      // es_MX by mistake. Only the routing locale actually varies for now.
+      // es_MX by mistake.
       locale: locale === "en" ? "en_US" : "es_CL",
       url,
-      title: `${about.name} — ${about.role}`,
-      description: about.tagline,
-      siteName: `${about.name} · Portafolio`,
+      title: `${name} — ${role}`,
+      description: tagline,
+      siteName: `${name} · Portafolio`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${about.name} — ${about.role}`,
-      description: about.tagline,
+      title: `${name} — ${role}`,
+      description: tagline,
     },
     robots: {
       index: true,
@@ -123,19 +133,20 @@ export default async function RootLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const { name, role, tagline, location } = about[locale];
 
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: about.name,
-    jobTitle: about.role,
-    description: about.tagline,
+    name,
+    jobTitle: role,
+    description: tagline,
     email: contact.email,
     telephone: contact.phone,
     url: SITE_URL,
     address: {
       "@type": "PostalAddress",
-      addressLocality: about.location,
+      addressLocality: location,
     },
     sameAs: contact.socials.map((social) => social.url),
   };
