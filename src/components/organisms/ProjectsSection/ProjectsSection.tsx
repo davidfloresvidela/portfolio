@@ -1,9 +1,12 @@
+import { getTranslations } from "next-intl/server";
 import { Reveal } from "@/components/atoms/Reveal";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
 import { SectionHeading } from "@/components/molecules/SectionHeading";
 import { projects } from "@/data/projects";
 
-export function ProjectsSection() {
+export async function ProjectsSection() {
+  const t = await getTranslations("projects");
+
   return (
     <section
       id="projects"
@@ -11,9 +14,9 @@ export function ProjectsSection() {
     >
       <Reveal>
         <SectionHeading
-          eyebrow="Proyectos"
-          title="Trabajo seleccionado"
-          description="Una muestra de productos que he diseñado y desarrollado."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          description={t("description")}
         />
       </Reveal>
 

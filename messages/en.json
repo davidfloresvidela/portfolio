@@ -1,0 +1,100 @@
+{
+  "language": {
+    "label": "Language",
+    "es": "Español",
+    "en": "English"
+  },
+  "nav": {
+    "hero": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "experience": "Experience",
+    "projects": "Projects",
+    "contact": "Contact",
+    "srLabel": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "theme": {
+    "activateLight": "Switch to light mode",
+    "activateDark": "Switch to dark mode",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "available": "Available for projects",
+    "viewProjects": "View projects",
+    "contact": "Get in touch",
+    "scrollDown": "Scroll to the about section"
+  },
+  "about": {
+    "eyebrow": "About me",
+    "title": "Behind the code"
+  },
+  "skills": {
+    "eyebrow": "Skills",
+    "title": "Tech stack",
+    "description": "Tools and technologies I use to build products end to end."
+  },
+  "experience": {
+    "eyebrow": "Experience",
+    "title": "Professional background"
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Selected work",
+    "description": "A sample of products I've designed and built.",
+    "featured": "Featured",
+    "viewDemo": "View demo",
+    "viewCode": "Code"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let's build something together",
+    "description": "Got a project in mind? Write to me and I'll reply within 24 hours.",
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "youremail@example.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me about your project…",
+      "submit": "Send message",
+      "submitting": "Sending…",
+      "successTitle": "Message sent!",
+      "successBody": "Thanks for writing — I'll get back to you soon.",
+      "errorBanner": "Couldn't send it. Try again or email me directly.",
+      "errors": {
+        "name": "Enter your name.",
+        "email": "Enter a valid email address.",
+        "message": "Your message needs to be at least 10 characters."
+      }
+    },
+    "directEmail": "Direct email",
+    "socials": "Social",
+    "downloadCv": "Download CV"
+  },
+  "footer": {
+    "tagline": "Designed and built with Next.js"
+  },
+  "layout": {
+    "skipToContent": "Skip to content"
+  },
+  "notFound": {
+    "metaTitle": "Page not found",
+    "eyebrow": "Error 404",
+    "heading": "This page doesn't exist",
+    "description": "The link you followed might be broken, or the page has moved.",
+    "backHome": "Back home"
+  },
+  "error": {
+    "eyebrow": "Something went wrong",
+    "heading": "An unexpected error occurred",
+    "description": "Please try again. If the problem persists, email me directly.",
+    "retry": "Try again"
+  },
+  "loading": {
+    "label": "Loading…"
+  }
+}

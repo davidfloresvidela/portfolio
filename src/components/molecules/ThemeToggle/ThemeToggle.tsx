@@ -2,12 +2,14 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Icon } from "@/components/atoms/Icon";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { cn } from "@/lib/cn";
 import type { ThemeToggleProps } from "./ThemeToggle.types";
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
+  const t = useTranslations("theme");
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
@@ -15,8 +17,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       type="button"
       onClick={toggleTheme}
-      aria-label={isDark ? "Activar modo claro" : "Activar modo oscuro"}
-      title={isDark ? "Modo claro" : "Modo oscuro"}
+      aria-label={isDark ? t("activateLight") : t("activateDark")}
+      title={isDark ? t("lightMode") : t("darkMode")}
       className={cn(
         "border-subtle text-secondary hover:border-accent/40 hover:text-accent relative flex size-11 items-center justify-center overflow-hidden rounded-lg border transition-colors duration-200",
         className,
