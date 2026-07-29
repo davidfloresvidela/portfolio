@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
 import { Text } from "@/components/atoms/Text";
@@ -7,14 +8,16 @@ import { StatCard } from "@/components/molecules/StatCard";
 import { about } from "@/data/about";
 import { stats } from "@/data/navigation";
 
-export function AboutSection() {
+export async function AboutSection() {
+  const t = await getTranslations("about");
+
   return (
     <section
       id="about"
       className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8"
     >
       <Reveal>
-        <SectionHeading eyebrow="Sobre mí" title="Detrás del código" />
+        <SectionHeading eyebrow={t("eyebrow")} title={t("title")} />
       </Reveal>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
