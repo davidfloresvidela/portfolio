@@ -10,4 +10,7 @@ export const contact: Contact = {
   // Rendered through a plain <a> (see Button), which — unlike next/link —
   // doesn't get the basePath applied automatically.
   cvUrl: withBasePath("/cv-david-flores.pdf"),
+  // Recruiter-facing filename best practice: First_Last_CV — the actual
+  // asset path above stays a stable, generic name regardless.
+  cvDownloadName: "David_Flores_CV.pdf",
 };
