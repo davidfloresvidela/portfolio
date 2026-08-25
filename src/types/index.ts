@@ -46,6 +46,9 @@ export interface Contact {
   email: string;
   socials: SocialLink[];
   cvUrl: string;
+  // What the browser names the saved file on download — independent of
+  // cvUrl's actual path, which stays a stable, generic asset name.
+  cvDownloadName: string;
 }
 
 export interface NavLink {
