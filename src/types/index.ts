@@ -26,15 +26,31 @@ export interface ExperienceItem {
   stack: string[];
 }
 
+// One stage of a project that was rebuilt over time (e.g. a V1 and the
+// migration that replaces it), shown inside the same card.
+export interface ProjectVersion {
+  label: string;
+  period: string;
+  description: string;
+  stack: string[];
+  liveUrl?: string;
+  // Translated status label, e.g. "En desarrollo" — absent once shipped.
+  status?: string;
+}
+
 export interface Project {
   title: string;
   description: string;
+  // Empty when the project lists its stack per version instead.
   stack: string[];
-  liveUrl: string;
+  // Absent while nothing is publicly deployed yet.
+  liveUrl?: string;
   // Absent when the source is closed — some personal projects use private
   // repos, so this should never be filled with a fabricated GitHub URL.
   repoUrl?: string;
   featured: boolean;
+  status?: string;
+  versions?: ProjectVersion[];
 }
 
 export interface SocialLink {

@@ -6,6 +6,37 @@ import { Icon } from "@/components/atoms/Icon";
 import { Text } from "@/components/atoms/Text";
 import type { ProjectCardProps } from "./ProjectCard.types";
 
+function StackList({ stack }: { stack: string[] }) {
+  if (stack.length === 0) return null;
+  return (
+    <ul className="mt-4 flex flex-wrap gap-2">
+      {stack.map((tech) => (
+        <li key={tech}>
+          <Badge tone="accent">{tech}</Badge>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function DemoLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
+    >
+      {label}
+      <Icon
+        icon={ArrowUpRight}
+        size={16}
+        className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
+    </a>
+  );
+}
+
 export async function ProjectCard({ project, locale }: ProjectCardProps) {
   const t = await getTranslations({ locale, namespace: "projects" });
 
@@ -28,35 +59,58 @@ export async function ProjectCard({ project, locale }: ProjectCardProps) {
         >
           {project.title}
         </Text>
-        {project.featured && <Badge tone="accent2">{t("featured")}</Badge>}
+        <div className="flex shrink-0 flex-wrap justify-end gap-2">
+          {project.status && <Badge tone="neutral">{project.status}</Badge>}
+          {project.featured && <Badge tone="accent2">{t("featured")}</Badge>}
+        </div>
       </div>
 
-      <Text as="p" variant="body" tone="secondary" className="flex-1">
+      <Text as="p" variant="body" tone="secondary">
         {project.description}
       </Text>
 
-      <ul className="mt-5 flex flex-wrap gap-2">
-        {project.stack.map((tech) => (
-          <li key={tech}>
-            <Badge tone="accent">{tech}</Badge>
-          </li>
-        ))}
-      </ul>
+      {project.versions && (
+        <ol className="mt-5 flex flex-col gap-4">
+          {project.versions.map((version) => (
+            <li
+              key={version.label}
+              className="border-subtle rounded-xl border p-4"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <Text as="h4" variant="body" className="font-semibold">
+                  {version.label}
+                </Text>
+                <span className="text-secondary font-mono text-xs">
+                  {version.period}
+                </span>
+              </div>
+              <Text as="p" variant="small" tone="secondary" className="mt-2">
+                {version.description}
+              </Text>
+              <StackList stack={version.stack} />
+              {(version.liveUrl || version.status) && (
+                <div className="mt-3 flex items-center gap-3">
+                  {version.liveUrl && (
+                    <DemoLink href={version.liveUrl} label={t("viewDemo")} />
+                  )}
+                  {version.status && (
+                    <Badge tone="neutral">{version.status}</Badge>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      )}
+
+      <div className="flex-1">
+        <StackList stack={project.stack} />
+      </div>
 
       <div className="border-subtle mt-6 flex items-center gap-5 border-t pt-4">
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:text-accent inline-flex min-h-11 items-center gap-1.5 font-mono text-sm transition-colors"
-        >
-          {t("viewDemo")}
-          <Icon
-            icon={ArrowUpRight}
-            size={16}
-            className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
-        </a>
+        {project.liveUrl && (
+          <DemoLink href={project.liveUrl} label={t("viewDemo")} />
+        )}
         {project.repoUrl ? (
           <a
             href={project.repoUrl}
