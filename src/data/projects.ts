@@ -6,19 +6,44 @@ export const projects: Record<Locale, Project[]> = {
     {
       title: "StellarisMind",
       description:
-        "Plataforma full stack para profesionales de salud mental: historial clínico, seguimiento por sesión, asignación de actividades y comunicación sincrónica entre paciente y psicólogo. Incluye un módulo especializado para pacientes con TDA que registra emociones asociadas a eventos específicos.",
-      stack: [
-        "React Native",
-        "Expo",
-        ".NET 10",
-        "Azure",
-        "Docker",
-        "Cloudflare R2",
-        "Clerk",
-        "EF Core",
-      ],
-      liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
+        "Plataforma para profesionales de salud mental y sus pacientes. La construí primero sobre .NET y Azure, y hoy la estoy migrando a Supabase y Cloudflare para reducir costos de infraestructura y mejorarla.",
+      stack: [],
       featured: true,
+      versions: [
+        {
+          label: "V1 · .NET + React Native",
+          period: "feb. 2026 — abr. 2026",
+          description:
+            "Historial clínico, seguimiento por sesión, asignación de actividades y comunicación sincrónica entre paciente y psicólogo, con un módulo para pacientes con TDA que registra emociones asociadas a eventos específicos.",
+          stack: [
+            ".NET 10",
+            "EF Core",
+            "React Native",
+            "Expo",
+            "Azure",
+            "Docker",
+            "Cloudflare R2",
+            "Clerk",
+          ],
+          liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
+        },
+        {
+          label: "V2 · Migración a Supabase + Cloudflare",
+          period: "oct. 2026 — Actualidad",
+          description:
+            "PostgreSQL con RLS, Edge Functions y Next.js sobre Cloudflare Workers, en un monorepo con Clean Architecture. Módulo de reservas completo: pagos por transferencia con revisión de comprobantes, Google Calendar y Meet, y correos con cola de reintentos.",
+          stack: [
+            "Supabase",
+            "PostgreSQL",
+            "Next.js",
+            "Cloudflare Workers",
+            "TypeScript",
+            "Turborepo",
+            "Playwright",
+          ],
+          status: "En desarrollo",
+        },
+      ],
     },
     {
       title: "OptiAhorro",
@@ -33,28 +58,71 @@ export const projects: Record<Locale, Project[]> = {
         "Zustand",
         "Zod",
         "Tailwind CSS",
+        "Cloudflare Pages",
       ],
       liveUrl: "https://www.optiahorro.cl/",
       featured: true,
+    },
+    {
+      title: "Slangario",
+      description:
+        "App móvil de trivia para aprender slang en inglés: rondas con puntaje, rachas, energía, tienda, onboarding y perfil, con anuncios con recompensa y notificaciones push.",
+      stack: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Supabase",
+        "TanStack Query",
+        "Zustand",
+        "AdMob",
+        "OneSignal",
+      ],
+      featured: false,
+      status: "En validación",
     },
   ],
   en: [
     {
       title: "StellarisMind",
       description:
-        "Full-stack platform for mental health professionals: clinical history, per-session tracking, activity assignment, and real-time patient-psychologist communication. Includes a specialized module for ADHD patients that logs emotions tied to specific events.",
-      stack: [
-        "React Native",
-        "Expo",
-        ".NET 10",
-        "Azure",
-        "Docker",
-        "Cloudflare R2",
-        "Clerk",
-        "EF Core",
-      ],
-      liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
+        "Platform for mental health professionals and their patients. I first built it on .NET and Azure, and I'm now migrating it to Supabase and Cloudflare to cut infrastructure costs and improve it.",
+      stack: [],
       featured: true,
+      versions: [
+        {
+          label: "V1 · .NET + React Native",
+          period: "Feb 2026 — Apr 2026",
+          description:
+            "Clinical history, per-session tracking, activity assignment, and real-time patient-psychologist communication, with a module for ADHD patients that logs emotions tied to specific events.",
+          stack: [
+            ".NET 10",
+            "EF Core",
+            "React Native",
+            "Expo",
+            "Azure",
+            "Docker",
+            "Cloudflare R2",
+            "Clerk",
+          ],
+          liveUrl: "https://gentle-mushroom-04015650f.7.azurestaticapps.net",
+        },
+        {
+          label: "V2 · Migration to Supabase + Cloudflare",
+          period: "Oct 2026 — Present",
+          description:
+            "PostgreSQL with RLS, Edge Functions, and Next.js on Cloudflare Workers, in a monorepo with Clean Architecture. Complete booking module: bank-transfer payments with receipt review, Google Calendar and Meet, and emails sent through a retry queue.",
+          stack: [
+            "Supabase",
+            "PostgreSQL",
+            "Next.js",
+            "Cloudflare Workers",
+            "TypeScript",
+            "Turborepo",
+            "Playwright",
+          ],
+          status: "In development",
+        },
+      ],
     },
     {
       title: "OptiAhorro",
@@ -69,9 +137,27 @@ export const projects: Record<Locale, Project[]> = {
         "Zustand",
         "Zod",
         "Tailwind CSS",
+        "Cloudflare Pages",
       ],
       liveUrl: "https://www.optiahorro.cl/",
       featured: true,
+    },
+    {
+      title: "Slangario",
+      description:
+        "Mobile trivia app for learning English slang: scored rounds, streaks, energy, a shop, onboarding, and a profile, with rewarded ads and push notifications.",
+      stack: [
+        "React Native",
+        "Expo",
+        "TypeScript",
+        "Supabase",
+        "TanStack Query",
+        "Zustand",
+        "AdMob",
+        "OneSignal",
+      ],
+      featured: false,
+      status: "In validation",
     },
   ],
 };
