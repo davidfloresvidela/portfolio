@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-2ee08a.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000.svg)](https://nextjs.org)
 
-Portafolio personal de **David Flores**, Desarrollador Full Stack.
+Portafolio personal de **David Flores**, Ingeniero de Software.
 Sitio de una sola página: hero, sobre mí, habilidades, experiencia,
 proyectos y contacto — con modo claro/oscuro completo y una estética
 "botanical/tech" (neutros suaves + acento verde).
@@ -17,8 +17,17 @@ CI/CD y un historial de git organizado por feature.
 
 ## Screenshots
 
-_Pendiente: se agregan capturas reales (modo claro y oscuro) — ver
-[Estado del proyecto](#estado-del-proyecto)._
+| Modo oscuro                                                                   | Modo claro                                                                    |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| ![Hero del portafolio en modo oscuro](docs/screenshots/hero-dark-desktop.png) | ![Hero del portafolio en modo claro](docs/screenshots/hero-light-desktop.png) |
+
+<p align="center">
+  <img src="docs/screenshots/hero-dark-mobile.png" alt="Hero del portafolio en móvil, modo oscuro" width="240">
+  &nbsp;&nbsp;
+  <img src="docs/screenshots/hero-light-mobile.png" alt="Hero del portafolio en móvil, modo claro" width="240">
+</p>
+
+![Sección de proyectos con StellarisMind en dos versiones, OptiAhorro y Slangario](docs/screenshots/projects-dark-desktop.png)
 
 ## Stack
 
@@ -60,24 +69,25 @@ formulario de contacto — ver [CONTRIBUTING.md](CONTRIBUTING.md#variables-de-en
 
 ### Scripts
 
-| Script                 | Qué hace                                  |
-| ---------------------- | ------------------------------------------ |
-| `npm run dev`           | Servidor de desarrollo                     |
-| `npm run build`         | Build de producción                        |
-| `npm run start`         | Sirve el build de producción                |
-| `npm run lint`          | ESLint                                     |
-| `npm run typecheck`     | `tsc --noEmit`                             |
-| `npm run test`          | Suite de tests (Vitest)                    |
-| `npm run test:watch`    | Tests en modo watch                        |
-| `npm run format`        | Prettier (escribe)                         |
-| `npm run format:check`  | Prettier (solo verifica)                   |
-| `npm run build:pages`   | Build de exportación estática para GitHub Pages |
+| Script                 | Qué hace                                        |
+| ---------------------- | ----------------------------------------------- |
+| `npm run dev`          | Servidor de desarrollo                          |
+| `npm run build`        | Build de producción                             |
+| `npm run start`        | Sirve el build de producción                    |
+| `npm run lint`         | ESLint                                          |
+| `npm run typecheck`    | `tsc --noEmit`                                  |
+| `npm run test`         | Suite de tests (Vitest)                         |
+| `npm run test:watch`   | Tests en modo watch                             |
+| `npm run format`       | Prettier (escribe)                              |
+| `npm run format:check` | Prettier (solo verifica)                        |
+| `npm run build:pages`  | Build de exportación estática para GitHub Pages |
 
 ## Calidad y CI/CD
 
 Cada PR corre en GitHub Actions: lint, typecheck, tests, formato, build, y
 validación de mensajes de commit (Conventional Commits, enforced también
-localmente vía Husky). Ver [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+localmente vía Husky). Ver [`ci.yml`](.github/workflows/ci.yml) y
+[`commitlint.yml`](.github/workflows/commitlint.yml).
 
 Cada push a `main` (es decir, cada release) despliega automáticamente a
 GitHub Pages vía [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
@@ -90,11 +100,10 @@ arquitectura (basePath, ausencia de middleware, resolución de idioma sin
 
 ## Estado del proyecto
 
-El sitio está funcionalmente completo (`v1.0.0`) y desplegado en GitHub
+El sitio está funcionalmente completo (`v1.3.0`) y desplegado en GitHub
 Pages. Pendientes conocidos, marcados explícitamente en el código en vez
 de dejados como placeholders silenciosos:
 
-- Captura de screenshots reales (modo claro y oscuro).
 - Endpoint real de Formspree (`NEXT_PUBLIC_FORM_ENDPOINT`) — el formulario
   de contacto está oculto por ahora (ver `ContactForm.tsx`).
 
