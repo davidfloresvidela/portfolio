@@ -86,7 +86,8 @@ formulario de contacto — ver [CONTRIBUTING.md](CONTRIBUTING.md#variables-de-en
 
 Cada PR corre en GitHub Actions: lint, typecheck, tests, formato, build, y
 validación de mensajes de commit (Conventional Commits, enforced también
-localmente vía Husky). Ver [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+localmente vía Husky). Ver [`ci.yml`](.github/workflows/ci.yml) y
+[`commitlint.yml`](.github/workflows/commitlint.yml).
 
 Cada push a `main` (es decir, cada release) despliega automáticamente a
 GitHub Pages vía [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
