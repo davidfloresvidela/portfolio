@@ -5,10 +5,10 @@ export const experience: Record<Locale, ExperienceItem[]> = {
   es: [
     {
       company: "IMAGEN S.A.",
-      role: "Desarrollador Full Stack",
+      role: "Líder Técnico · Desarrollador Full Stack",
       period: "nov. 2021 — Actualidad",
       description:
-        "Desarrollo full stack de sistemas web enterprise, con React + TypeScript y C# .NET. Arquitectura backend con Clean Architecture, microservicios, caching, rate limiting y políticas de reintento (Polly). Lideré la migración de un sistema legacy de permisos de trabajo (SharePoint + WebParts) a una arquitectura moderna con React + Vite, microservicios en .NET 10 LTS y SQL Server normalizado. Referente técnico del equipo: definición de estándares, mentoría y comunicación directa con clientes.",
+        "Desarrollo full stack de sistemas web enterprise, con React + TypeScript y C# .NET. Arquitectura backend con Clean Architecture, microservicios, caching, rate limiting y políticas de reintento (Polly). Lideré la migración de un sistema legacy de permisos de trabajo (SharePoint + WebParts) a una arquitectura moderna con React + Vite, microservicios en .NET 10 LTS y SQL Server normalizado. Liderazgo técnico del equipo: definición de estándares, mentoría y comunicación directa con clientes.",
       stack: [
         "C#",
         ".NET",
@@ -48,10 +48,10 @@ export const experience: Record<Locale, ExperienceItem[]> = {
   en: [
     {
       company: "IMAGEN S.A.",
-      role: "Full Stack Developer",
+      role: "Tech Lead · Full Stack Developer",
       period: "Nov 2021 — Present",
       description:
-        "Full-stack development of enterprise web systems, using React + TypeScript and C# .NET. Backend architecture with Clean Architecture, microservices, caching, rate limiting, and retry policies (Polly). Led the migration of a legacy work-permit system (SharePoint + WebParts) to a modern architecture with React + Vite, microservices on .NET 10 LTS, and a normalized SQL Server database. Technical point of contact for the team: defining standards, mentoring, and direct client communication.",
+        "Full-stack development of enterprise web systems, using React + TypeScript and C# .NET. Backend architecture with Clean Architecture, microservices, caching, rate limiting, and retry policies (Polly). Led the migration of a legacy work-permit system (SharePoint + WebParts) to a modern architecture with React + Vite, microservices on .NET 10 LTS, and a normalized SQL Server database. Technical leadership of the team: defining standards, mentoring, and direct client communication.",
       stack: [
         "C#",
         ".NET",
