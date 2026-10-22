@@ -23,7 +23,14 @@ export async function ProjectsSection({ locale }: { locale: Locale }) {
 
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         {projects[locale].map((project, index) => (
-          <Reveal as="div" key={project.title} delay={index * 0.06}>
+          <Reveal
+            as="div"
+            key={project.title}
+            delay={index * 0.06}
+            // A project with versions is far taller than its neighbours; giving
+            // it the full row keeps the other cards from stretching to match.
+            className={project.versions ? "md:col-span-2" : undefined}
+          >
             <ProjectCard project={project} locale={locale} />
           </Reveal>
         ))}

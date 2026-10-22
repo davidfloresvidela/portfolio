@@ -70,7 +70,7 @@ export async function ProjectCard({ project, locale }: ProjectCardProps) {
       </Text>
 
       {project.versions && (
-        <ol className="mt-5 flex flex-col gap-4">
+        <ol className="mt-5 grid gap-4 md:grid-cols-2">
           {project.versions.map((version) => (
             <li
               key={version.label}
