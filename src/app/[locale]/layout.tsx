@@ -20,8 +20,11 @@ function localeUrl(locale: string): string {
 const keywordsByLocale: Record<Locale, string[]> = {
   es: [
     "David Flores",
+    "Ingeniero de Software",
     "Desarrollador Web",
     "Full Stack",
+    "Backend",
+    ".NET",
     "Next.js",
     "React",
     "TypeScript",
@@ -29,8 +32,11 @@ const keywordsByLocale: Record<Locale, string[]> = {
   ],
   en: [
     "David Flores",
+    "Software Engineer",
     "Web Developer",
     "Full Stack",
+    "Backend",
+    ".NET",
     "Next.js",
     "React",
     "TypeScript",
