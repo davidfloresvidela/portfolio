@@ -8,8 +8,9 @@ export const education: Record<Locale, EducationGroup[]> = {
       category: "Educación",
       entries: [
         {
-          title: "Ingeniería en Informática",
-          detail: "INACAP",
+          title: "Ingeniero en Informática",
+          detail:
+            "INACAP · Título profesional y Licenciatura en Ingeniería en Informática",
           period: "2017 — 2021",
         },
       ],
@@ -54,8 +55,9 @@ export const education: Record<Locale, EducationGroup[]> = {
       category: "Education",
       entries: [
         {
-          title: "Computer Engineering",
-          detail: "INACAP",
+          title: "Computer Engineer",
+          detail:
+            "INACAP · Professional degree and Bachelor's degree in Computer Engineering",
           period: "2017 — 2021",
         },
       ],
