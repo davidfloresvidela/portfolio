@@ -18,6 +18,22 @@ export interface SkillGroup {
   items: string[];
 }
 
+export type EducationGroupId = "education" | "certifications" | "languages";
+
+export interface EducationEntry {
+  title: string;
+  detail: string;
+  period?: string;
+}
+
+export interface EducationGroup {
+  // Same split as SkillGroup: `id` drives the icon, `category` is the
+  // translated heading.
+  id: EducationGroupId;
+  category: string;
+  entries: EducationEntry[];
+}
+
 export interface ExperienceItem {
   company: string;
   role: string;

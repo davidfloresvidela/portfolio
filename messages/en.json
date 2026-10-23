@@ -9,6 +9,7 @@
     "about": "About",
     "skills": "Skills",
     "experience": "Experience",
+    "education": "Education",
     "projects": "Projects",
     "contact": "Contact",
     "srLabel": "Main navigation",
@@ -40,6 +41,10 @@
   "experience": {
     "eyebrow": "Experience",
     "title": "Professional background"
+  },
+  "education": {
+    "eyebrow": "Education",
+    "title": "Education, certifications and languages"
   },
   "projects": {
     "eyebrow": "Projects",

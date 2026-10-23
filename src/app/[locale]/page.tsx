@@ -5,6 +5,7 @@ import { Footer } from "@/components/organisms/Footer";
 import { HeroSection } from "@/components/organisms/HeroSection";
 import { AboutSection } from "@/components/organisms/AboutSection";
 import { SkillsGrid } from "@/components/organisms/SkillsGrid";
+import { EducationSection } from "@/components/organisms/EducationSection";
 import { ExperienceTimeline } from "@/components/organisms/ExperienceTimeline";
 import { ProjectsSection } from "@/components/organisms/ProjectsSection";
 import { ContactForm } from "@/components/organisms/ContactForm";
@@ -27,6 +28,7 @@ export default async function Home({
       <AboutSection locale={locale} />
       <SkillsGrid locale={locale} />
       <ExperienceTimeline locale={locale} />
+      <EducationSection locale={locale} />
       <ProjectsSection locale={locale} />
       <ContactForm locale={locale} />
     </MainTemplate>
