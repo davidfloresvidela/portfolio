@@ -18,6 +18,7 @@ const NAV_IDS = [
   "about",
   "skills",
   "experience",
+  "education",
   "projects",
   "contact",
 ] as const;

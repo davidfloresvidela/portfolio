@@ -9,6 +9,7 @@
     "about": "Sobre mí",
     "skills": "Habilidades",
     "experience": "Experiencia",
+    "education": "Formación",
     "projects": "Proyectos",
     "contact": "Contacto",
     "srLabel": "Navegación principal",
@@ -40,6 +41,10 @@
   "experience": {
     "eyebrow": "Experiencia",
     "title": "Trayectoria profesional"
+  },
+  "education": {
+    "eyebrow": "Formación",
+    "title": "Educación, certificaciones e idiomas"
   },
   "projects": {
     "eyebrow": "Proyectos",
