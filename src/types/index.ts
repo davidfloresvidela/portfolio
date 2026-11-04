@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/routing";
+
 export interface About {
   name: string;
   role: string;
@@ -77,10 +79,14 @@ export interface SocialLink {
 export interface Contact {
   email: string;
   socials: SocialLink[];
-  cvUrl: string;
+  cv: Record<Locale, CvFile>;
+}
+
+export interface CvFile {
+  url: string;
   // What the browser names the saved file on download — independent of
-  // cvUrl's actual path, which stays a stable, generic asset name.
-  cvDownloadName: string;
+  // url's actual path, which stays a stable, generic asset name.
+  downloadName: string;
 }
 
 export interface NavLink {
