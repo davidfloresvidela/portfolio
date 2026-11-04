@@ -118,4 +118,4 @@ commits, y checklist antes de abrir un PR.
 
 ## Contacto
 
-david.flores22@inacapmail.cl · [github.com/davidfloresvidela](https://github.com/davidfloresvidela)
+david.flores.videla@gmail.com · [github.com/davidfloresvidela](https://github.com/davidfloresvidela)
