@@ -57,9 +57,9 @@ export async function ContactForm({ locale }: { locale: Locale }) {
         </div>
 
         <Button
-          href={contact.cvUrl}
+          href={contact.cv[locale].url}
           variant="ghost"
-          download={contact.cvDownloadName}
+          download={contact.cv[locale].downloadName}
         >
           <Icon icon={Download} size={18} />
           {t("downloadCv")}
